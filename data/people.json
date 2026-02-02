@@ -1,0 +1,231 @@
+{
+  "directors": [
+    {
+      "name": "Haewon Jeong",
+      "title": "Assistant Professor",
+      "image": "haewon_jeong.webp",
+      "description": "My research aims to develop theoretically-grounded tools for trustworthy and reliable machine learning systems by drawing ideas from different fields (e.g., Information Theory, Statistics, Machine Learning, Distributed Systems). I was a postdoctoral researcher at Harvard SEAS. I completed my Ph.D. and M.Eng. in Electrical and Computer Engineering at Carnegie Mellon University. I received B.S. in Electrical Engineering and Computer Science at KAIST.",
+      "website": "",
+      "email": ""
+    },
+    {
+      "name": "Nina Miolane",
+      "title": "Assistant Professor",
+      "image": "nina_miolane.webp",
+      "description": "My research aims to reveal the geometric signatures of natural and artificial intelligence, by using tools from geometry, topology, computer vision, machine learning and deep learning. I was a postdoctoral researcher at Stanford, in the Statistics department. I received my M.S. in Mathematics from Ecole Polytechnique and Imperial College, and my Ph.D. in Computer Science from INRIA in collaboration with Stanford. I used to work as a deep learning software engineer in start-ups of the Silicon Valley.",
+      "website": "",
+      "email": ""
+    },
+    {
+      "name": "Yao Qin",
+      "title": "Assistant Professor",
+      "image": "yao_qin.webp",
+      "description": "My research aims to develop robust AI systems and to advance AI for healthcare, specifically for diabetes. I obtained my Ph.D. degree at UC San Diego in Computer Science. During my Ph.D., I was very fortunate to intern under the supervision of Geoffrey Hinton, Ian Goodfellow and many others.",
+      "website": "",
+      "email": ""
+    }
+  ],
+  "trainees": [
+    {
+      "name": "Mehak Dhaliwal",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "mehak_dhaliwal.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Francisco Acosta",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "francisco_acosta.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Abby Bertics",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "abby_bertics.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Arjun Nichani",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "arjun_nichani.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Sarah Kushner",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "sarah_kushner.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Kenan Tang",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "kenan_tang.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Daniel Holmberg",
+      "title": "Visiting Scholar",
+      "advisor": "",
+      "image": "daniel_holmberg.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Guillermo Bernárdez Gil",
+      "title": "Postdoc",
+      "advisor": "",
+      "image": "guillermo_bernardez_gil.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Daniel Kunin",
+      "title": "Visiting Scholar",
+      "advisor": "",
+      "image": "daniel_kunin.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Mathilde Papillon",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "mathilde_papillon.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Andong Hua",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "andong_hua.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Simon Mataigne",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "simon_mataigne.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Tian Qiu",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "tian_qiu.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Louisa Cornelis",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "louisa_cornelis.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Adele Myers",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "adele_myers.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Luís F. Pereira",
+      "title": "Research Engineer",
+      "advisor": "",
+      "image": "luis_pereira.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Youngseok Yoon",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "youngseok_yoon.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Rohan Bhatt",
+      "title": "Undergrad researcher",
+      "advisor": "",
+      "image": "rohan_bhatt.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Sid Kannan",
+      "title": "Undergrad researcher",
+      "advisor": "",
+      "image": "sid_kannan.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Rasta Tadayon",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "rasta_tadayon.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Bariscan Kurtkaya",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "bariscan_kurtkaya.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Fatih Dinç",
+      "title": "Postdoc",
+      "advisor": "",
+      "image": "fatih_dinc.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Neel Sankaran",
+      "title": "PhD Student",
+      "advisor": "",
+      "image": "neel_sankaran.webp",
+      "description": "",
+      "website": ""
+    },
+    {
+      "name": "Alex West",
+      "title": "Lab Manager",
+      "advisor": "",
+      "image": "alex_west.webp",
+      "description": "",
+      "website": ""
+    }
+  ],
+  "advisors": [
+    {
+      "name": "Johan Mathe",
+      "title": "Industry Advisor",
+      "image": "johan_mathe.webp",
+      "description": "",
+      "website": ""
+    }
+  ]
+}

@@ -5,20 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>People - REAL AI Lab</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .person-card {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .person-card:hover {
+            border-color: var(--sky-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .person-card img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 12px rgba(100, 189, 227, 0.25), 0 0 0 1px rgba(100, 189, 227, 0.15);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .person-card:hover img {
+            box-shadow: 0 4px 20px rgba(100, 189, 227, 0.35), 0 0 0 1px rgba(100, 189, 227, 0.25);
+        }
+
+        .person-card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .person-card .role {
+            font-size: 0.85rem;
+            color: var(--sky-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .person-card .advisor {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .person-card .links {
+            margin-top: 0.75rem;
+        }
+
+        .person-card .links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin: 0 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .person-card .links a:hover {
+            color: var(--sky-blue);
+        }
+
+        /* Director cards - larger with full overlay hover description */
+        #directors-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        #directors-grid .person-card {
+            position: relative;
+            padding: 2rem 1.5rem;
+            overflow: hidden;
+            min-height: 320px;
+        }
+
+        #directors-grid .person-card img {
+            width: 180px;
+            height: 180px;
+        }
+
+        #directors-grid .person-card h3 {
+            font-size: 1.3rem;
+        }
+
+        #directors-grid .person-card .role {
+            font-size: 1rem;
+        }
+
+        #directors-grid .person-card .description {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(4px);
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            font-size: 1rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: var(--text-primary);
+            overflow-y: auto;
+        }
+
+        #directors-grid .person-card:hover .description {
+            opacity: 1;
+        }
+
+        #directors-grid .person-card:hover {
+            transform: translateY(0);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        @media (max-width: 900px) {
+            #directors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--sky-blue);
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <div class="nav-brand">
-                <a href="../index.html">REAL AI</a>
-            </div>
-            <ul class="nav-menu">
+        <nav class="container">
+            <a href="../index.html" class="logo">REAL AI</a>
+            <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="news.html">News</a></li>
                 <li><a href="people.html" class="active">People</a></li>
                 <li><a href="publications.html">Publications</a></li>
-                <li><a href="seminars.html">Seminars</a></li>
-                <li><a href="events.html">Events</a></li>
+                <li><a href="news.html">News</a></li>
                 <li><a href="join.html">Join</a></li>
             </ul>
             <button class="nav-toggle" aria-label="Toggle navigation">
@@ -31,41 +170,112 @@
 
     <main>
         <section class="page-header">
-            <h1>People</h1>
+            <div class="container">
+                <h1>Our Team</h1>
+            </div>
         </section>
 
         <section class="content-section">
             <div class="container">
-                <h2>Faculty</h2>
-                <div class="people-grid">
-                    <div class="person-card">
-                        <img src="../assets/images/people/placeholder.jpg" alt="Faculty Name">
-                        <h3>Faculty Name</h3>
-                        <p class="role">Professor</p>
-                    </div>
-                    <!-- Add more faculty here -->
-                </div>
+                <h2 class="section-title">Directors</h2>
+                <div class="people-grid" id="directors-grid"></div>
 
-                <h2 style="margin-top: 3rem;">Graduate Students</h2>
-                <div class="people-grid">
-                    <div class="person-card">
-                        <img src="../assets/images/people/placeholder.jpg" alt="Student Name">
-                        <h3>Student Name</h3>
-                        <p class="role">PhD Student</p>
-                    </div>
-                    <!-- Add more students here -->
-                </div>
+                <h2 class="section-title">Trainees</h2>
+                <div class="people-grid" id="trainees-grid"></div>
+
+                <h2 class="section-title">Advisors</h2>
+                <div class="people-grid" id="advisors-grid"></div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>Contact: <a href="mailto:ai@example.edu">ai@example.edu</a></p>
-            <p>&copy; 2025 REAL AI Lab. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">REAL AI</span>
+                    <p>Reliable, Efficient, and Aligned AI</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="news.html">News</a>
+                    <a href="people.html">People</a>
+                    <a href="publications.html">Publications</a>
+                    <a href="join.html">Join</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 REAL AI, UC Santa Barbara. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script src="../js/main.js"></script>
+    <script>
+        // People data embedded for local file access
+        const peopleData = {
+            "directors": [
+                { "name": "Haewon Jeong", "title": "Assistant Professor", "image": "haewon_jeong.webp", "description": "My research aims to develop theoretically-grounded tools for trustworthy and reliable machine learning systems by drawing ideas from different fields (e.g., Information Theory, Statistics, Machine Learning, Distributed Systems). I was a postdoctoral researcher at Harvard SEAS. I completed my Ph.D. and M.Eng. in Electrical and Computer Engineering at Carnegie Mellon University. I received B.S. in Electrical Engineering and Computer Science at KAIST.", "website": "", "email": "" },
+                { "name": "Nina Miolane", "title": "Assistant Professor", "image": "nina_miolane.webp", "description": "My research aims to reveal the geometric signatures of natural and artificial intelligence, by using tools from geometry, topology, computer vision, machine learning and deep learning. I was a postdoctoral researcher at Stanford, in the Statistics department. I received my M.S. in Mathematics from Ecole Polytechnique and Imperial College, and my Ph.D. in Computer Science from INRIA in collaboration with Stanford. I used to work as a deep learning software engineer in start-ups of the Silicon Valley.", "website": "", "email": "" },
+                { "name": "Yao Qin", "title": "Assistant Professor", "image": "yao_qin.webp", "description": "My research aims to develop robust AI systems and to advance AI for healthcare, specifically for diabetes. I obtained my Ph.D. degree at UC San Diego in Computer Science. During my Ph.D., I was very fortunate to intern under the supervision of Geoffrey Hinton, Ian Goodfellow and many others.", "website": "", "email": "" }
+            ],
+            "trainees": [
+                { "name": "Mehak Dhaliwal", "title": "PhD Student", "advisor": "", "image": "mehak_dhaliwal.webp", "description": "", "website": "" },
+                { "name": "Francisco Acosta", "title": "PhD Student", "advisor": "", "image": "francisco_acosta.webp", "description": "", "website": "" },
+                { "name": "Abby Bertics", "title": "PhD Student", "advisor": "", "image": "abby_bertics.webp", "description": "", "website": "" },
+                { "name": "Arjun Nichani", "title": "PhD Student", "advisor": "", "image": "arjun_nichani.webp", "description": "", "website": "" },
+                { "name": "Sarah Kushner", "title": "PhD Student", "advisor": "", "image": "sarah_kushner.webp", "description": "", "website": "" },
+                { "name": "Kenan Tang", "title": "PhD Student", "advisor": "", "image": "kenan_tang.webp", "description": "", "website": "" },
+                { "name": "Daniel Holmberg", "title": "Visiting Scholar", "advisor": "", "image": "daniel_holmberg.webp", "description": "", "website": "" },
+                { "name": "Guillermo Bernárdez Gil", "title": "Postdoc", "advisor": "", "image": "guillermo_bernardez_gil.webp", "description": "", "website": "" },
+                { "name": "Daniel Kunin", "title": "Visiting Scholar", "advisor": "", "image": "daniel_kunin.webp", "description": "", "website": "" },
+                { "name": "Mathilde Papillon", "title": "PhD Student", "advisor": "", "image": "mathilde_papillon.webp", "description": "", "website": "" },
+                { "name": "Andong Hua", "title": "PhD Student", "advisor": "", "image": "andong_hua.webp", "description": "", "website": "" },
+                { "name": "Simon Mataigne", "title": "PhD Student", "advisor": "", "image": "simon_mataigne.webp", "description": "", "website": "" },
+                { "name": "Tian Qiu", "title": "PhD Student", "advisor": "", "image": "tian_qiu.webp", "description": "", "website": "" },
+                { "name": "Louisa Cornelis", "title": "PhD Student", "advisor": "", "image": "louisa_cornelis.webp", "description": "", "website": "" },
+                { "name": "Adele Myers", "title": "PhD Student", "advisor": "", "image": "adele_myers.webp", "description": "", "website": "" },
+                { "name": "Luís F. Pereira", "title": "Research Engineer", "advisor": "", "image": "luis_pereira.webp", "description": "", "website": "" },
+                { "name": "Youngseok Yoon", "title": "PhD Student", "advisor": "", "image": "youngseok_yoon.webp", "description": "", "website": "" },
+                { "name": "Rohan Bhatt", "title": "Undergrad researcher", "advisor": "", "image": "rohan_bhatt.webp", "description": "", "website": "" },
+                { "name": "Sid Kannan", "title": "Undergrad researcher", "advisor": "", "image": "sid_kannan.webp", "description": "", "website": "" },
+                { "name": "Rasta Tadayon", "title": "PhD Student", "advisor": "", "image": "rasta_tadayon.webp", "description": "", "website": "" },
+                { "name": "Bariscan Kurtkaya", "title": "PhD Student", "advisor": "", "image": "bariscan_kurtkaya.webp", "description": "", "website": "" },
+                { "name": "Fatih Dinç", "title": "Postdoc", "advisor": "", "image": "fatih_dinc.webp", "description": "", "website": "" },
+                { "name": "Neel Sankaran", "title": "PhD Student", "advisor": "", "image": "neel_sankaran.webp", "description": "", "website": "" },
+                { "name": "Alex West", "title": "Lab Manager", "advisor": "", "image": "alex_west.webp", "description": "", "website": "" }
+            ],
+            "advisors": [
+                { "name": "Johan Mathe", "title": "Industry Advisor", "image": "johan_mathe.webp", "description": "", "website": "" }
+            ]
+        };
+
+        function renderPeople(gridId, people, showAdvisor) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+
+            const isDirectors = gridId === 'directors-grid';
+
+            grid.innerHTML = people.map(person => `
+                <div class="person-card">
+                    <img src="../assets/images/people/${person.image}" alt="${person.name}">
+                    <h3>${person.name}</h3>
+                    <p class="role">${person.title}</p>
+                    ${showAdvisor && person.advisor ? `<p class="advisor">Advisor: ${person.advisor}</p>` : ''}
+                    <div class="links">
+                        ${person.website ? `<a href="${person.website}" target="_blank">Website</a>` : ''}
+                        ${person.email ? `<a href="mailto:${person.email}">Email</a>` : ''}
+                    </div>
+                    ${isDirectors && person.description ? `<div class="description">${person.description}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Render people when page is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPeople('directors-grid', peopleData.directors, false);
+            renderPeople('trainees-grid', peopleData.trainees, true);
+            renderPeople('advisors-grid', peopleData.advisors, false);
+        });
+    </script>
 </body>
 </html>

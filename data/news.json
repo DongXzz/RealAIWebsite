@@ -1,0 +1,67 @@
+{
+  "news": [
+    {
+      "title": "AI-Driven FTD Research Featured in The Transmitter",
+      "date": "Nov 2025",
+      "content": "PhD student Louisa Cornelis uses explainable graph neural networks and LLM-assisted analysis to study frontotemporal degeneration, predicting cognitive decline from proteomics data.",
+      "link": "https://www.thetransmitter.org/machine-learning/how-neuroscientists-are-using-ai/",
+      "image": "ftd_research.png"
+    },
+    {
+      "title": "HerBrain: Digital Twin of the Maternal Brain Named TIME's Best Invention",
+      "date": "Oct 2025",
+      "content": "HerBrain uses machine learning to model weekly structural changes during pregnancy and postpartum, aiming for 2027 launch integration with pregnancy apps.",
+      "link": "https://time.com/collections/best-inventions-2025/7318361/herbrain/",
+      "image": "herbrain_time.jpg"
+    },
+    {
+      "title": "AI's Role in Education and the Future of Learning",
+      "date": "Sep 2025",
+      "content": "Abby Bertics explores how students use AI for essays and problem-solving while universities grapple with adaptation challenges.",
+      "link": "https://www.economist.com/podcasts/2025/09/20/we-dont-need-no-ai-education",
+      "image": "ai_education.jpg"
+    },
+    {
+      "title": "AI for Diabetes Wins ADA Abstract Award 2025",
+      "date": "Jun 2025",
+      "content": "Researchers developed a model explaining glucose changes during physical activity in type 1 diabetes using data from 1,000+ exercise sessions.",
+      "link": "https://diabetesjournals.org/diabetes/article/74/Supplement_1/268-OR/159782",
+      "image": "diabetes_award.jpg"
+    },
+    {
+      "title": "Maternal Brain AI Receives $1M Chan Zuckerberg Initiative Grant",
+      "date": "Dec 2024",
+      "content": "Researchers building an AI-powered digital twin of the maternal brain received $1M in funding for women's brain health advancement.",
+      "link": "https://gi.ece.ucsb.edu/news/our-project-ai-model-maternal-brain-awarded-1m-funding-chan-zuckerberg-initiative",
+      "image": "czi_grant.png"
+    },
+    {
+      "title": "Dementia Research Receives NSF Graduate Research Fellowship",
+      "date": "Apr 2024",
+      "content": "PhD student Louisa Cornelis awarded NSF GRFP for graph neural network research with dementia applications.",
+      "link": "https://gi.ece.ucsb.edu/news/louisa-cornelis-receives-prestigious-nsf-graduate-research-fellowship-grfp",
+      "image": "louisa_nsf.png"
+    },
+    {
+      "title": "Framework for Bias-Free AI Receives NSF CAREER Award",
+      "date": "Apr 2024",
+      "content": "Prof. Jeong's research eliminating biases in AI models receives prestigious NSF CAREER Award.",
+      "link": "https://engineering.ucsb.edu/news/dirty-data-opportunity-cleaning-bias-ai",
+      "image": "jeong_career.png"
+    },
+    {
+      "title": "Ann S. Bowers Women's Brain Health Initiative Launches",
+      "date": "Nov 2023",
+      "content": "Prof. Miolane co-founded WBHI, leveraging AI to accelerate women's brain health discoveries.",
+      "link": "https://gi.ece.ucsb.edu/news/ann-s-bowers-womens-brain-health-initiative-launches-san-jose-ca",
+      "image": "wbhi_launch.jpg"
+    },
+    {
+      "title": "Geometric AI for Imaging Science Receives NSF CAREER Award",
+      "date": "Oct 2023",
+      "content": "Prof. Miolane's research developing Geometric AI methods to analyze shapes in scientific images receives NSF CAREER Award.",
+      "link": "https://gi.ece.ucsb.edu/news/nina-miolane-receives-prestigious-nsf-career-award",
+      "image": "miolane_career.jpg"
+    }
+  ]
+}

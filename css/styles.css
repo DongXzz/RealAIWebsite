@@ -45,7 +45,7 @@
     /* Layout */
     --max-width: 1200px;
     --section-padding: 80px;
-    --container-padding: 2.5rem;
+    --container-padding: 5rem;
 }
 
 /* Reset & Base */
@@ -100,7 +100,7 @@ body {
    Header & Navigation
    ============================================ */
 header {
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 0;
     position: fixed;
     top: 0;
     left: 0;
@@ -194,7 +194,7 @@ nav {
    ============================================ */
 .hero {
     display: flex;
-    min-height: 100vh;
+    min-height: 75vh;
     position: relative;
 }
 
@@ -404,7 +404,48 @@ nav {
 
 .stat-item:hover {
     border-color: var(--sky-blue);
-    background: linear-gradient(135deg, white 0%, rgba(204, 230, 237, 0.2) 100%);
+}
+
+.approach-section-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.approach-grid-inline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.approach-item-inline {
+    padding: 1rem;
+    border-left: 2px solid var(--sky-blue);
+    padding-left: 1rem;
+}
+
+.approach-item-inline .approach-number {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--sky-blue);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.approach-item-inline h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.approach-item-inline p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
 }
 
 .stat-item:hover .stat-number {
@@ -839,6 +880,11 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    .approach-grid-inline {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
     .about-stats {
         grid-template-columns: 1fr;
     }
@@ -859,16 +905,29 @@ footer {
    Page Header (for subpages)
    ============================================ */
 .page-header {
-    background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%);
-    padding: 8rem 2rem 4rem;
+    background: transparent;
+    padding-top: 120px;
+    padding-bottom: 2rem;
     text-align: left;
 }
 
 .page-header h1 {
-    font-size: 2.75rem;
-    font-weight: 400;
+    font-size: 2.5rem;
+    font-weight: 300;
     color: var(--text-primary);
     letter-spacing: -0.02em;
+    position: relative;
+    display: inline-block;
+}
+
+.page-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--sky-blue);
 }
 
 /* ============================================
