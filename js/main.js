@@ -238,8 +238,10 @@ class MorphingBinary {
                 break;
 
             case 'kidney':
-                // Two kidneys side by side - classic bean shapes with clear outlines
-                const kidneysPerSide = Math.floor(count / 2);
+                // Two kidneys with blood vessels (renal arteries/veins and central vessels)
+                const kidneyParticles = Math.floor(count * 0.75);
+                const vesselParticles = count - kidneyParticles;
+                const kidneysPerSide = Math.floor(kidneyParticles / 2);
 
                 // Helper function to generate kidney bean outline points
                 const getKidneyOutline = (centerX, centerY, scaleX, scaleY, flipX) => {
@@ -248,24 +250,17 @@ class MorphingBinary {
 
                     for (let i = 0; i < numOutlinePoints; i++) {
                         const t = (i / numOutlinePoints) * Math.PI * 2;
-
-                        // Bean/kidney shape parametric equation
-                        // Outer convex side and inner concave side (hilum)
                         let r = 1;
 
-                        // Create the indent (hilum) on the inner side
-                        // For left kidney, indent on right; for right kidney, indent on left
                         const hilumAngle = flipX ? 0 : Math.PI;
                         const angleDiff = Math.abs(t - hilumAngle);
                         const wrappedDiff = Math.min(angleDiff, Math.PI * 2 - angleDiff);
 
                         if (wrappedDiff < 0.8) {
-                            // Hilum indent
                             const indentStrength = Math.cos(wrappedDiff * Math.PI / 1.6) * 0.35;
                             r = 1 - indentStrength;
                         }
 
-                        // Add slight variation for organic look
                         r += Math.sin(t * 3) * 0.05;
 
                         const x = centerX + Math.cos(t) * scaleX * r * (flipX ? -1 : 1);
@@ -276,34 +271,85 @@ class MorphingBinary {
                     return kidneyPoints;
                 };
 
-                // Left kidney
+                // Kidney positions
                 const leftKidneyCenterX = this.centerX - this.scale * 0.55;
                 const leftKidneyCenterY = this.centerY;
-                const leftOutline = getKidneyOutline(
-                    leftKidneyCenterX, leftKidneyCenterY,
-                    this.scale * 0.35, this.scale * 0.55, false
-                );
-
-                // Right kidney
                 const rightKidneyCenterX = this.centerX + this.scale * 0.55;
                 const rightKidneyCenterY = this.centerY;
-                const rightOutline = getKidneyOutline(
-                    rightKidneyCenterX, rightKidneyCenterY,
-                    this.scale * 0.35, this.scale * 0.55, true
-                );
+                const kidneyScaleX = this.scale * 0.32;
+                const kidneyScaleY = this.scale * 0.5;
+
+                const leftOutline = getKidneyOutline(leftKidneyCenterX, leftKidneyCenterY, kidneyScaleX, kidneyScaleY, false);
+                const rightOutline = getKidneyOutline(rightKidneyCenterX, rightKidneyCenterY, kidneyScaleX, kidneyScaleY, true);
+
+                // Blood vessel points
+                const vesselPoints = [];
+
+                // Central vessels (aorta and vena cava) - vertical lines in center
+                const aortaX = this.centerX - this.scale * 0.05;
+                const venaX = this.centerX + this.scale * 0.05;
+                for (let t = 0; t <= 1; t += 0.03) {
+                    const y = this.centerY - this.scale * 0.6 + t * this.scale * 1.2;
+                    vesselPoints.push({ x: aortaX, y: y });
+                    vesselPoints.push({ x: venaX, y: y });
+                }
+
+                // Left renal artery (from aorta to left kidney hilum)
+                const leftHilumX = leftKidneyCenterX + kidneyScaleX * 0.7;
+                const leftHilumY = leftKidneyCenterY;
+                for (let t = 0; t <= 1; t += 0.05) {
+                    // Curve from aorta to kidney
+                    const x = aortaX + (leftHilumX - aortaX) * t;
+                    const curve = Math.sin(t * Math.PI) * this.scale * 0.05;
+                    vesselPoints.push({ x: x, y: leftHilumY - this.scale * 0.05 + curve });
+                }
+
+                // Left renal vein (from left kidney hilum to vena cava)
+                for (let t = 0; t <= 1; t += 0.05) {
+                    const x = leftHilumX + (venaX - leftHilumX) * t;
+                    const curve = Math.sin(t * Math.PI) * this.scale * 0.05;
+                    vesselPoints.push({ x: x, y: leftHilumY + this.scale * 0.05 - curve });
+                }
+
+                // Right renal artery (from aorta to right kidney hilum)
+                const rightHilumX = rightKidneyCenterX - kidneyScaleX * 0.7;
+                const rightHilumY = rightKidneyCenterY;
+                for (let t = 0; t <= 1; t += 0.05) {
+                    const x = aortaX + (rightHilumX - aortaX) * t;
+                    const curve = Math.sin(t * Math.PI) * this.scale * 0.05;
+                    vesselPoints.push({ x: x, y: rightHilumY - this.scale * 0.05 + curve });
+                }
+
+                // Right renal vein (from right kidney hilum to vena cava)
+                for (let t = 0; t <= 1; t += 0.05) {
+                    const x = rightHilumX + (venaX - rightHilumX) * t;
+                    const curve = Math.sin(t * Math.PI) * this.scale * 0.05;
+                    vesselPoints.push({ x: x, y: rightHilumY + this.scale * 0.05 - curve });
+                }
+
+                // Ureters (tubes going down from each kidney)
+                for (let t = 0; t <= 1; t += 0.04) {
+                    // Left ureter
+                    const leftUreterX = leftHilumX + t * this.scale * 0.1;
+                    const leftUreterY = leftKidneyCenterY + kidneyScaleY * 0.3 + t * this.scale * 0.4;
+                    vesselPoints.push({ x: leftUreterX, y: leftUreterY });
+
+                    // Right ureter
+                    const rightUreterX = rightHilumX - t * this.scale * 0.1;
+                    const rightUreterY = rightKidneyCenterY + kidneyScaleY * 0.3 + t * this.scale * 0.4;
+                    vesselPoints.push({ x: rightUreterX, y: rightUreterY });
+                }
 
                 // Distribute particles for left kidney
                 for (let i = 0; i < kidneysPerSide; i++) {
                     if (i < kidneysPerSide * 0.5) {
-                        // Outline particles
                         const pt = leftOutline[i % leftOutline.length];
-                        const jitter = 0.03;
+                        const jitter = 0.025;
                         points.push({
                             x: pt.x + (Math.random() - 0.5) * this.scale * jitter,
                             y: pt.y + (Math.random() - 0.5) * this.scale * jitter
                         });
                     } else {
-                        // Fill particles
                         const angle = Math.random() * Math.PI * 2;
                         const r = Math.random() * 0.8;
                         const hilumAngle = Math.PI;
@@ -315,8 +361,8 @@ class MorphingBinary {
                         }
                         const finalR = r * maxR;
                         points.push({
-                            x: leftKidneyCenterX + Math.cos(angle) * this.scale * 0.35 * finalR,
-                            y: leftKidneyCenterY + Math.sin(angle) * this.scale * 0.55 * finalR
+                            x: leftKidneyCenterX + Math.cos(angle) * kidneyScaleX * finalR,
+                            y: leftKidneyCenterY + Math.sin(angle) * kidneyScaleY * finalR
                         });
                     }
                 }
@@ -324,15 +370,13 @@ class MorphingBinary {
                 // Distribute particles for right kidney
                 for (let i = 0; i < kidneysPerSide; i++) {
                     if (i < kidneysPerSide * 0.5) {
-                        // Outline particles
                         const pt = rightOutline[i % rightOutline.length];
-                        const jitter = 0.03;
+                        const jitter = 0.025;
                         points.push({
                             x: pt.x + (Math.random() - 0.5) * this.scale * jitter,
                             y: pt.y + (Math.random() - 0.5) * this.scale * jitter
                         });
                     } else {
-                        // Fill particles
                         const angle = Math.random() * Math.PI * 2;
                         const r = Math.random() * 0.8;
                         const hilumAngle = 0;
@@ -344,10 +388,20 @@ class MorphingBinary {
                         }
                         const finalR = r * maxR;
                         points.push({
-                            x: rightKidneyCenterX - Math.cos(angle) * this.scale * 0.35 * finalR,
-                            y: rightKidneyCenterY + Math.sin(angle) * this.scale * 0.55 * finalR
+                            x: rightKidneyCenterX - Math.cos(angle) * kidneyScaleX * finalR,
+                            y: rightKidneyCenterY + Math.sin(angle) * kidneyScaleY * finalR
                         });
                     }
+                }
+
+                // Distribute particles for blood vessels
+                for (let i = 0; i < vesselParticles; i++) {
+                    const pt = vesselPoints[i % vesselPoints.length];
+                    const jitter = 0.015;
+                    points.push({
+                        x: pt.x + (Math.random() - 0.5) * this.scale * jitter,
+                        y: pt.y + (Math.random() - 0.5) * this.scale * jitter
+                    });
                 }
                 break;
 
