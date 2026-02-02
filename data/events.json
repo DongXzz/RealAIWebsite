@@ -1,0 +1,198 @@
+[
+    {
+        "title": "Biologically Plausible Computing: Navigating Energy Landscapes",
+        "speaker": "Francesco Bullo",
+        "affiliation": "Department of Mechanical Engineering, UCSB",
+        "date": "2026-01-30",
+        "image": "francesco_bullo.jpg"
+    },
+    {
+        "title": "Vector Search: High-Throughput and Robust Query Processing and Modern Benchmarks",
+        "speaker": "Teemu Roos",
+        "affiliation": "Department of Computer Science, University of Helsinki",
+        "date": "2025-12-08",
+        "image": ""
+    },
+    {
+        "title": "Reliable and Efficient AI for Robotics",
+        "speaker": "Christian Shewmake",
+        "affiliation": "New Theory",
+        "date": "2025-11-14",
+        "image": ""
+    },
+    {
+        "title": "Learning Cellular Dynamics through Neural and Geometric Models",
+        "speaker": "Wenjun Zhao",
+        "affiliation": "Department of Mathematics, Wake Forest University",
+        "date": "2025-11-07",
+        "image": ""
+    },
+    {
+        "title": "Predictive Navigation Emerges from Real and Artificial Neural Networks",
+        "speaker": "Andy Alexander",
+        "affiliation": "Department of Psychological and Brain Sciences, UCSB",
+        "date": "2025-10-17",
+        "image": "andy_alexander.jpg"
+    },
+    {
+        "title": "\"Double Machine Learning\" for Causal Inference",
+        "speaker": "Alex Franks",
+        "affiliation": "Department of Statistics and Applied Probability, UCSB",
+        "date": "2025-10-03",
+        "image": ""
+    },
+    {
+        "title": "When AI Meets the Web: Prompt Injection Risks",
+        "speaker": "Yigitcan Kaya",
+        "affiliation": "Department of Computer Science, UCSB",
+        "date": "2025-05-30",
+        "image": ""
+    },
+    {
+        "title": "Learning Mechanics of Neural Networks",
+        "speaker": "Daniel Kunin",
+        "affiliation": "Institute for Computational and Mathematical Engineering, Stanford",
+        "date": "2025-05-16",
+        "image": "daniel_kunin.jpg"
+    },
+    {
+        "title": "Gone With the Bits: Revealing Racial Bias in Low-Rate Neural Compression",
+        "speaker": "Tian Qiu",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2025-05-02",
+        "image": "tian_qiu.jpg"
+    },
+    {
+        "title": "Methods Combining Networks and Machine Learning for Complex Systems",
+        "speaker": "Sanjukta Krishnagopal",
+        "affiliation": "Department of Computer Science, UCSB",
+        "date": "2025-04-08",
+        "image": "sanjukta_krishnagopal.jpg"
+    },
+    {
+        "title": "Understanding and Harnessing Reinforcement Learning for Security",
+        "speaker": "Wenbo Guo",
+        "affiliation": "Department of Computer Science, UCSB",
+        "date": "2024-05-31",
+        "image": "wenbo_guo.jpg"
+    },
+    {
+        "title": "Initialization Matters for Adversarial Transfer Learning",
+        "speaker": "Andong Hua",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2024-05-17",
+        "image": ""
+    },
+    {
+        "title": "Neuroformer: Multimodal and Multitask Generative Pretraining",
+        "speaker": "Antonis Antoniades",
+        "affiliation": "Department of Computer Science, UCSB",
+        "date": "2024-05-03",
+        "image": "antonis_antoniades.jpg"
+    },
+    {
+        "title": "Organoids and Topology",
+        "speaker": "Eve Bodnia",
+        "affiliation": "Department of Physics, UCSB",
+        "date": "2024-04-19",
+        "image": "eve_bodnia.png"
+    },
+    {
+        "title": "Neural Emulators and Hamiltonian Monte Carlo for Parameter Inference",
+        "speaker": "Diego Gonzalez",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2024-03-07",
+        "image": "diego_gonzalez.jpg"
+    },
+    {
+        "title": "Geometry of Neural Manifolds",
+        "speaker": "Francisco Acosta",
+        "affiliation": "Department of Physics and Electrical & Computer Engineering, UCSB",
+        "date": "2024-02-22",
+        "image": "francisco_acosta.jpg"
+    },
+    {
+        "title": "No Dataset Left Behind: DIET for Stable and Data Efficient Self-Supervised Learning",
+        "speaker": "David Klindt",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2024-01-25",
+        "image": "david_klindt.webp"
+    },
+    {
+        "title": "Architectures of Topological Deep Learning",
+        "speaker": "Mathilde Papillon",
+        "affiliation": "Department of Physics and Electrical & Computer Engineering, UCSB",
+        "date": "2023-05-19",
+        "image": "mathilde_papillon.jpg"
+    },
+    {
+        "title": "Probabilistic ML with p-bits",
+        "speaker": "Kerem Camsari",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2023-05-05",
+        "image": "kerem_camsari.gif"
+    },
+    {
+        "title": "Symbolic Regression for Dynamical Systems with Neural ODEs",
+        "speaker": "Colby Fronk",
+        "affiliation": "Department of Chemical Engineering, UCSB",
+        "date": "2023-04-21",
+        "image": "colby_fronk.jpg"
+    },
+    {
+        "title": "Trustworthy and Explainable ML for Networks",
+        "speaker": "Arpit Gupta",
+        "affiliation": "Department of Computer Science, UCSB",
+        "date": "2023-03-10",
+        "image": "arpit_gupta.jpg"
+    },
+    {
+        "title": "ML Algorithms for Imaging and Graphics",
+        "speaker": "Pradeep Sen",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2023-03-03",
+        "image": "pradeep_sen.jpg"
+    },
+    {
+        "title": "Manifold Learning for Non-Linear Dynamics",
+        "speaker": "Paul Atzberger",
+        "affiliation": "Department of Mathematics and Mechanical Engineering, UCSB",
+        "date": "2023-02-17",
+        "image": "paul_atzberger.png"
+    },
+    {
+        "title": "ML for Neuroprostheses",
+        "speaker": "Michael Beyeler",
+        "affiliation": "Department of Computer Science, UCSB",
+        "date": "2023-02-10",
+        "image": "michael_beyeler.png"
+    },
+    {
+        "title": "Federated Learning",
+        "speaker": "Ramtin Pedarsani",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2023-02-03",
+        "image": "ramtin_pedarsani.jpg"
+    },
+    {
+        "title": "Tensor-Compressed Neural Networks for Edge AI",
+        "speaker": "Zheng Zhang",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2023-01-27",
+        "image": "zheng_zhang.jpg"
+    },
+    {
+        "title": "Fairness in Machine Learning",
+        "speaker": "Haewon Jeong",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2023-01-20",
+        "image": "haewon_jeong.jpg"
+    },
+    {
+        "title": "Geometric Machine Learning",
+        "speaker": "Nina Miolane",
+        "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+        "date": "2023-01-13",
+        "image": "nina_miolane.jpg"
+    }
+]

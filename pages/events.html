@@ -5,21 +5,263 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events - REAL AI Lab</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .events-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Calendar Styles */
+        .calendar-container {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-header h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .calendar-nav button {
+            background: none;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .calendar-nav button:hover {
+            border-color: var(--sky-blue);
+            color: var(--sky-blue);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border-radius: 50%;
+            cursor: default;
+            position: relative;
+        }
+
+        .calendar-day.other-month {
+            color: #ccc;
+        }
+
+        .calendar-day.has-event {
+            background: var(--sky-blue);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .calendar-day.has-event:hover {
+            transform: scale(1.1);
+        }
+
+        .calendar-day.today {
+            border: 2px solid var(--sky-blue);
+        }
+
+        .calendar-day.selected {
+            box-shadow: 0 0 0 2px var(--text-primary);
+        }
+
+        /* Event List Styles */
+        .events-list {
+            margin-bottom: 3rem;
+        }
+
+        .events-year-section {
+            margin-bottom: 2rem;
+        }
+
+        .events-year-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--sky-blue);
+        }
+
+        .event-card {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 1rem;
+            padding: 1.25rem;
+        }
+
+        .event-card:hover {
+            border-color: var(--sky-blue);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .event-card .image-container {
+            width: 120px;
+            min-width: 120px;
+            height: 120px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8fbfc 0%, #e8f4f8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 1.5rem;
+        }
+
+        .event-card .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .event-card .image-container.no-image {
+            background: linear-gradient(135deg, #f0f7fa 0%, #e0eff5 100%);
+        }
+
+        .event-card .image-container.no-image::after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            background: rgba(100, 189, 227, 0.15);
+            border-radius: 50%;
+        }
+
+        .event-card .content {
+            padding: 0.25rem 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .event-card .date {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--sky-blue);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .event-card h3 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .event-card .speaker {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .event-card .affiliation {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Upcoming vs Past styling */
+        .upcoming-label {
+            display: inline-block;
+            background: var(--sky-blue);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 900px) {
+            .events-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-container {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .event-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .event-card .image-container {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <div class="nav-brand">
-                <a href="../index.html">REAL AI</a>
-            </div>
-            <ul class="nav-menu">
+        <nav class="container">
+            <a href="../index.html" class="logo">REAL AI</a>
+            <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="news.html">News</a></li>
                 <li><a href="people.html">People</a></li>
                 <li><a href="publications.html">Publications</a></li>
-                <li><a href="seminars.html">Seminars</a></li>
+                <li><a href="news.html">News</a></li>
                 <li><a href="events.html" class="active">Events</a></li>
-                <li><a href="join.html">Join</a></li>
+                <li><a href="give.html">Give</a></li>
             </ul>
             <button class="nav-toggle" aria-label="Toggle navigation">
                 <span></span>
@@ -31,41 +273,443 @@
 
     <main>
         <section class="page-header">
-            <h1>Events</h1>
+            <div class="container">
+                <h1>Events</h1>
+            </div>
         </section>
 
         <section class="content-section">
             <div class="container">
-                <h2>Upcoming Events</h2>
-                <ul class="news-list">
-                    <li class="news-item">
-                        <div class="date">March 2025</div>
-                        <h3>Event Title</h3>
-                        <p>Description of the event and what attendees can expect.</p>
-                    </li>
-                    <!-- Add more events here -->
-                </ul>
+                <div class="events-layout">
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <h3 id="calendar-month-year"></h3>
+                            <div class="calendar-nav">
+                                <button id="prev-month">&larr;</button>
+                                <button id="next-month">&rarr;</button>
+                            </div>
+                        </div>
+                        <div class="calendar-grid" id="calendar-grid">
+                            <div class="calendar-day-header">Su</div>
+                            <div class="calendar-day-header">Mo</div>
+                            <div class="calendar-day-header">Tu</div>
+                            <div class="calendar-day-header">We</div>
+                            <div class="calendar-day-header">Th</div>
+                            <div class="calendar-day-header">Fr</div>
+                            <div class="calendar-day-header">Sa</div>
+                        </div>
+                    </div>
 
-                <h2 style="margin-top: 3rem;">Past Events</h2>
-                <ul class="news-list">
-                    <li class="news-item">
-                        <div class="date">December 2024</div>
-                        <h3>Past Event Title</h3>
-                        <p>Summary of the past event.</p>
-                    </li>
-                    <!-- Add more past events here -->
-                </ul>
+                    <div class="events-list" id="events-container">
+                        <!-- Events will be rendered here -->
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>Contact: <a href="mailto:ai@example.edu">ai@example.edu</a></p>
-            <p>&copy; 2025 REAL AI Lab. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">REAL AI</span>
+                    <p>Reliable, Efficient, and Aligned AI</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="news.html">News</a>
+                    <a href="people.html">People</a>
+                    <a href="publications.html">Publications</a>
+                    <a href="events.html">Events</a>
+                    <a href="give.html">Give</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 REAL AI, UC Santa Barbara. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script src="../js/main.js"></script>
+    <script>
+        // Events data embedded for local file access
+        const eventsData = [
+            {
+                "title": "Biologically Plausible Computing: Navigating Energy Landscapes",
+                "speaker": "Francesco Bullo",
+                "affiliation": "Department of Mechanical Engineering, UCSB",
+                "date": "2026-01-30",
+                "image": "francesco_bullo.jpg"
+            },
+            {
+                "title": "Vector Search: High-Throughput and Robust Query Processing and Modern Benchmarks",
+                "speaker": "Teemu Roos",
+                "affiliation": "Department of Computer Science, University of Helsinki",
+                "date": "2025-12-08",
+                "image": ""
+            },
+            {
+                "title": "Reliable and Efficient AI for Robotics",
+                "speaker": "Christian Shewmake",
+                "affiliation": "New Theory",
+                "date": "2025-11-14",
+                "image": ""
+            },
+            {
+                "title": "Learning Cellular Dynamics through Neural and Geometric Models",
+                "speaker": "Wenjun Zhao",
+                "affiliation": "Department of Mathematics, Wake Forest University",
+                "date": "2025-11-07",
+                "image": ""
+            },
+            {
+                "title": "Predictive Navigation Emerges from Real and Artificial Neural Networks",
+                "speaker": "Andy Alexander",
+                "affiliation": "Department of Psychological and Brain Sciences, UCSB",
+                "date": "2025-10-17",
+                "image": "andy_alexander.jpg"
+            },
+            {
+                "title": "\"Double Machine Learning\" for Causal Inference",
+                "speaker": "Alex Franks",
+                "affiliation": "Department of Statistics and Applied Probability, UCSB",
+                "date": "2025-10-03",
+                "image": ""
+            },
+            {
+                "title": "When AI Meets the Web: Prompt Injection Risks",
+                "speaker": "Yigitcan Kaya",
+                "affiliation": "Department of Computer Science, UCSB",
+                "date": "2025-05-30",
+                "image": ""
+            },
+            {
+                "title": "Learning Mechanics of Neural Networks",
+                "speaker": "Daniel Kunin",
+                "affiliation": "Institute for Computational and Mathematical Engineering, Stanford",
+                "date": "2025-05-16",
+                "image": "daniel_kunin.jpg"
+            },
+            {
+                "title": "Gone With the Bits: Revealing Racial Bias in Low-Rate Neural Compression",
+                "speaker": "Tian Qiu",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2025-05-02",
+                "image": "tian_qiu.jpg"
+            },
+            {
+                "title": "Methods Combining Networks and Machine Learning for Complex Systems",
+                "speaker": "Sanjukta Krishnagopal",
+                "affiliation": "Department of Computer Science, UCSB",
+                "date": "2025-04-08",
+                "image": "sanjukta_krishnagopal.jpg"
+            },
+            {
+                "title": "Understanding and Harnessing Reinforcement Learning for Security",
+                "speaker": "Wenbo Guo",
+                "affiliation": "Department of Computer Science, UCSB",
+                "date": "2024-05-31",
+                "image": "wenbo_guo.jpg"
+            },
+            {
+                "title": "Initialization Matters for Adversarial Transfer Learning",
+                "speaker": "Andong Hua",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2024-05-17",
+                "image": ""
+            },
+            {
+                "title": "Neuroformer: Multimodal and Multitask Generative Pretraining",
+                "speaker": "Antonis Antoniades",
+                "affiliation": "Department of Computer Science, UCSB",
+                "date": "2024-05-03",
+                "image": "antonis_antoniades.jpg"
+            },
+            {
+                "title": "Organoids and Topology",
+                "speaker": "Eve Bodnia",
+                "affiliation": "Department of Physics, UCSB",
+                "date": "2024-04-19",
+                "image": "eve_bodnia.png"
+            },
+            {
+                "title": "Neural Emulators and Hamiltonian Monte Carlo for Parameter Inference",
+                "speaker": "Diego Gonzalez",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2024-03-07",
+                "image": "diego_gonzalez.jpg"
+            },
+            {
+                "title": "Geometry of Neural Manifolds",
+                "speaker": "Francisco Acosta",
+                "affiliation": "Department of Physics and Electrical & Computer Engineering, UCSB",
+                "date": "2024-02-22",
+                "image": "francisco_acosta.jpg"
+            },
+            {
+                "title": "No Dataset Left Behind: DIET for Stable and Data Efficient Self-Supervised Learning",
+                "speaker": "David Klindt",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2024-01-25",
+                "image": "david_klindt.webp"
+            },
+            {
+                "title": "Architectures of Topological Deep Learning",
+                "speaker": "Mathilde Papillon",
+                "affiliation": "Department of Physics and Electrical & Computer Engineering, UCSB",
+                "date": "2023-05-19",
+                "image": "mathilde_papillon.jpg"
+            },
+            {
+                "title": "Probabilistic ML with p-bits",
+                "speaker": "Kerem Camsari",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2023-05-05",
+                "image": "kerem_camsari.gif"
+            },
+            {
+                "title": "Symbolic Regression for Dynamical Systems with Neural ODEs",
+                "speaker": "Colby Fronk",
+                "affiliation": "Department of Chemical Engineering, UCSB",
+                "date": "2023-04-21",
+                "image": "colby_fronk.jpg"
+            },
+            {
+                "title": "Trustworthy and Explainable ML for Networks",
+                "speaker": "Arpit Gupta",
+                "affiliation": "Department of Computer Science, UCSB",
+                "date": "2023-03-10",
+                "image": "arpit_gupta.jpg"
+            },
+            {
+                "title": "ML Algorithms for Imaging and Graphics",
+                "speaker": "Pradeep Sen",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2023-03-03",
+                "image": "pradeep_sen.jpg"
+            },
+            {
+                "title": "Manifold Learning for Non-Linear Dynamics",
+                "speaker": "Paul Atzberger",
+                "affiliation": "Department of Mathematics and Mechanical Engineering, UCSB",
+                "date": "2023-02-17",
+                "image": "paul_atzberger.png"
+            },
+            {
+                "title": "ML for Neuroprostheses",
+                "speaker": "Michael Beyeler",
+                "affiliation": "Department of Computer Science, UCSB",
+                "date": "2023-02-10",
+                "image": "michael_beyeler.png"
+            },
+            {
+                "title": "Federated Learning",
+                "speaker": "Ramtin Pedarsani",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2023-02-03",
+                "image": "ramtin_pedarsani.jpg"
+            },
+            {
+                "title": "Tensor-Compressed Neural Networks for Edge AI",
+                "speaker": "Zheng Zhang",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2023-01-27",
+                "image": "zheng_zhang.jpg"
+            },
+            {
+                "title": "Fairness in Machine Learning",
+                "speaker": "Haewon Jeong",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2023-01-20",
+                "image": "haewon_jeong.jpg"
+            },
+            {
+                "title": "Geometric Machine Learning",
+                "speaker": "Nina Miolane",
+                "affiliation": "Department of Electrical & Computer Engineering, UCSB",
+                "date": "2023-01-13",
+                "image": "nina_miolane.jpg"
+            }
+        ];
+
+        // Calendar state
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        // Get event dates as a Set for quick lookup
+        function getEventDates() {
+            const dates = new Set();
+            eventsData.forEach(event => {
+                dates.add(event.date);
+            });
+            return dates;
+        }
+
+        const eventDates = getEventDates();
+
+        // Format date for display
+        function formatDate(dateStr) {
+            const date = new Date(dateStr + 'T00:00:00');
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Check if date is in the future
+        function isUpcoming(dateStr) {
+            const eventDate = new Date(dateStr + 'T00:00:00');
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return eventDate >= today;
+        }
+
+        // Render calendar
+        function renderCalendar() {
+            const grid = document.getElementById('calendar-grid');
+            const monthYearLabel = document.getElementById('calendar-month-year');
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                               'July', 'August', 'September', 'October', 'November', 'December'];
+
+            monthYearLabel.textContent = monthNames[currentMonth] + ' ' + currentYear;
+
+            // Clear existing days (keep headers)
+            const headers = [];
+            grid.querySelectorAll('.calendar-day-header').forEach(h => headers.push(h.cloneNode(true)));
+            grid.innerHTML = '';
+            headers.forEach(h => grid.appendChild(h));
+
+            // Get first day of month and total days
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+            // Today's date
+            const today = new Date();
+            const todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+
+            // Previous month days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day other-month';
+                day.textContent = daysInPrevMonth - i;
+                grid.appendChild(day);
+            }
+
+            // Current month days
+            for (let d = 1; d <= daysInMonth; d++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.textContent = d;
+
+                const dateStr = currentYear + '-' + String(currentMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+
+                if (dateStr === todayStr) {
+                    day.classList.add('today');
+                }
+
+                if (eventDates.has(dateStr)) {
+                    day.classList.add('has-event');
+                    day.title = 'Event on this day';
+                    day.addEventListener('click', function() { scrollToEvent(dateStr); });
+                }
+
+                grid.appendChild(day);
+            }
+
+            // Next month days
+            const totalCells = firstDay + daysInMonth;
+            const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+            for (let i = 1; i <= remainingCells; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day other-month';
+                day.textContent = i;
+                grid.appendChild(day);
+            }
+        }
+
+        // Scroll to event by date
+        function scrollToEvent(dateStr) {
+            const eventCard = document.querySelector('[data-date="' + dateStr + '"]');
+            if (eventCard) {
+                eventCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                eventCard.style.boxShadow = '0 0 0 3px var(--sky-blue)';
+                setTimeout(function() {
+                    eventCard.style.boxShadow = '';
+                }, 2000);
+            }
+        }
+
+        // Render events list
+        function renderEvents() {
+            const container = document.getElementById('events-container');
+            if (!container) return;
+
+            // Sort events by date (newest first)
+            const sortedEvents = eventsData.slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+
+            // Group by year
+            const eventsByYear = {};
+            sortedEvents.forEach(function(event) {
+                const year = event.date.split('-')[0];
+                if (!eventsByYear[year]) {
+                    eventsByYear[year] = [];
+                }
+                eventsByYear[year].push(event);
+            });
+
+            let html = '';
+
+            // Render each year section
+            Object.keys(eventsByYear).sort(function(a, b) { return b - a; }).forEach(function(year) {
+                const hasUpcoming = eventsByYear[year].some(function(e) { return isUpcoming(e.date); });
+                html += '<div class="events-year-section">';
+                html += '<h2 class="events-year-title">' + year + (hasUpcoming ? '<span class="upcoming-label">Upcoming</span>' : '') + '</h2>';
+
+                eventsByYear[year].forEach(function(event) {
+                    const upcoming = isUpcoming(event.date);
+                    html += '<div class="event-card" data-date="' + event.date + '">' +
+                            '<div class="image-container ' + (event.image ? '' : 'no-image') + '">' +
+                            (event.image ? '<img src="../assets/images/events/' + event.image + '" alt="' + event.speaker + '">' : '') +
+                            '</div>' +
+                            '<div class="content">' +
+                            '<p class="date">' + formatDate(event.date) + (upcoming ? ' <span class="upcoming-label">Upcoming</span>' : '') + '</p>' +
+                            '<h3>' + event.title + '</h3>' +
+                            '<p class="speaker">' + event.speaker + '</p>' +
+                            '<p class="affiliation">' + event.affiliation + '</p>' +
+                            '</div>' +
+                            '</div>';
+                });
+
+                html += '</div>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCalendar();
+            renderEvents();
+
+            // Calendar navigation
+            document.getElementById('prev-month').addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderCalendar();
+            });
+
+            document.getElementById('next-month').addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderCalendar();
+            });
+        });
+    </script>
 </body>
 </html>
