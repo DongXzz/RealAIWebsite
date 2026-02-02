@@ -53,7 +53,25 @@
         .person-card .role {
             font-size: 0.85rem;
             color: var(--sky-blue);
+            margin-bottom: 0.35rem;
+        }
+
+        .person-card .education {
+            font-size: 0.75rem;
+            color: #888;
             margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .person-card .education span {
+            display: inline-block;
+            margin: 0 0.15rem;
+        }
+
+        .person-card .education span:not(:last-child)::after {
+            content: '·';
+            margin-left: 0.4rem;
+            color: #aaa;
         }
 
         .person-card .advisor {
@@ -216,9 +234,9 @@
         // People data embedded for local file access
         const peopleData = {
             "directors": [
-                { "name": "Haewon Jeong", "title": "Assistant Professor", "image": "haewon_jeong.webp", "description": "My research aims to develop theoretically-grounded tools for trustworthy and reliable machine learning systems by drawing ideas from different fields (e.g., Information Theory, Statistics, Machine Learning, Distributed Systems). I was a postdoctoral researcher at Harvard SEAS. I completed my Ph.D. and M.Eng. in Electrical and Computer Engineering at Carnegie Mellon University. I received B.S. in Electrical Engineering and Computer Science at KAIST.", "website": "", "email": "" },
-                { "name": "Nina Miolane", "title": "Assistant Professor", "image": "nina_miolane.webp", "description": "My research aims to reveal the geometric signatures of natural and artificial intelligence, by using tools from geometry, topology, computer vision, machine learning and deep learning. I was a postdoctoral researcher at Stanford, in the Statistics department. I received my M.S. in Mathematics from Ecole Polytechnique and Imperial College, and my Ph.D. in Computer Science from INRIA in collaboration with Stanford. I used to work as a deep learning software engineer in start-ups of the Silicon Valley.", "website": "", "email": "" },
-                { "name": "Yao Qin", "title": "Assistant Professor", "image": "yao_qin.webp", "description": "My research aims to develop robust AI systems and to advance AI for healthcare, specifically for diabetes. I obtained my Ph.D. degree at UC San Diego in Computer Science. During my Ph.D., I was very fortunate to intern under the supervision of Geoffrey Hinton, Ian Goodfellow and many others.", "website": "", "email": "" }
+                { "name": "Haewon Jeong", "title": "Assistant Professor", "education": ["PhD @ CMU", "Postdoc @ Harvard"], "image": "haewon_jeong.webp", "description": "I like to understand the darkest secrets of the universe, using AI, and I build generative AI models to make physics simulations faster.", "website": "", "email": "" },
+                { "name": "Nina Miolane", "title": "Assistant Professor", "education": ["PhD @ INRIA", "Postdoc @ Stanford"], "image": "nina_miolane.webp", "description": "I explore the geometry of the world and build AI that understands shapes—from brain structures to cells—to advance science and help people like pregnant women!", "website": "", "email": "" },
+                { "name": "Yao Qin", "title": "Assistant Professor", "education": ["PhD @ UCSD", "Industry @ Google DeepMind"], "image": "yao_qin.webp", "description": "I develop robust, multimodal AI for healthcare, especially to help people with diabetes better manage their glucose and live healthier lives.", "website": "", "email": "" }
             ],
             "trainees": [
                 { "name": "Mehak Dhaliwal", "title": "PhD Student", "advisor": "", "image": "mehak_dhaliwal.webp", "description": "", "website": "" },
@@ -262,6 +280,7 @@
                     <img src="../assets/images/people/${person.image}" alt="${person.name}">
                     <h3>${person.name}</h3>
                     <p class="role">${person.title}</p>
+                    ${isDirectors && person.education ? `<p class="education">${person.education.map(e => '<span>' + e + '</span>').join('')}</p>` : ''}
                     ${showAdvisor && person.advisor ? `<p class="advisor">Advisor: ${person.advisor}</p>` : ''}
                     <div class="links">
                         ${person.website ? `<a href="${person.website}" target="_blank">Website</a>` : ''}
