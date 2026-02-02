@@ -228,40 +228,116 @@ class MorphingBinary {
                 break;
 
             case 'kidney':
-                // Kidney shape: classic bean shape with indent (hilum) on inner side
-                for (let i = 0; i < count; i++) {
-                    const angle = (i / count) * Math.PI * 2;
+                // Two kidneys side by side - classic bean shapes with clear outlines
+                const kidneysPerSide = Math.floor(count / 2);
 
-                    // Bean shape using parametric equation
-                    // Outer curve is larger, inner curve has a deep indent
-                    let radius;
+                // Helper function to generate kidney bean outline points
+                const getKidneyOutline = (centerX, centerY, scaleX, scaleY, flipX) => {
+                    const kidneyPoints = [];
+                    const numOutlinePoints = 60;
 
-                    // Create the characteristic kidney bean shape
-                    // The indent (hilum) is on the left side (around PI)
-                    const indentAngle = Math.PI; // Left side indent
-                    const angleDiff = Math.abs(angle - indentAngle);
-                    const indentWidth = 0.8; // How wide the indent region is
-                    const indentDepth = 0.5; // How deep the indent goes
+                    for (let i = 0; i < numOutlinePoints; i++) {
+                        const t = (i / numOutlinePoints) * Math.PI * 2;
 
-                    if (angleDiff < indentWidth) {
-                        // In the indent region - create concave curve
-                        const indentProgress = 1 - (angleDiff / indentWidth);
-                        const indentCurve = Math.sin(indentProgress * Math.PI);
-                        radius = this.scale * (0.8 - indentDepth * indentCurve);
-                    } else {
-                        // Normal convex bean curve
-                        radius = this.scale * (0.75 + 0.15 * Math.cos(angle * 2));
+                        // Bean/kidney shape parametric equation
+                        // Outer convex side and inner concave side (hilum)
+                        let r = 1;
+
+                        // Create the indent (hilum) on the inner side
+                        // For left kidney, indent on right; for right kidney, indent on left
+                        const hilumAngle = flipX ? 0 : Math.PI;
+                        const angleDiff = Math.abs(t - hilumAngle);
+                        const wrappedDiff = Math.min(angleDiff, Math.PI * 2 - angleDiff);
+
+                        if (wrappedDiff < 0.8) {
+                            // Hilum indent
+                            const indentStrength = Math.cos(wrappedDiff * Math.PI / 1.6) * 0.35;
+                            r = 1 - indentStrength;
+                        }
+
+                        // Add slight variation for organic look
+                        r += Math.sin(t * 3) * 0.05;
+
+                        const x = centerX + Math.cos(t) * scaleX * r * (flipX ? -1 : 1);
+                        const y = centerY + Math.sin(t) * scaleY * r;
+
+                        kidneyPoints.push({ x, y });
                     }
+                    return kidneyPoints;
+                };
 
-                    // Fill the interior
-                    const fillRandom = 0.25 + Math.random() * 0.75;
-                    const finalRadius = radius * fillRandom;
+                // Left kidney
+                const leftKidneyCenterX = this.centerX - this.scale * 0.55;
+                const leftKidneyCenterY = this.centerY;
+                const leftOutline = getKidneyOutline(
+                    leftKidneyCenterX, leftKidneyCenterY,
+                    this.scale * 0.35, this.scale * 0.55, false
+                );
 
-                    // Slightly taller than wide for kidney proportions
-                    const x = this.centerX + Math.cos(angle) * finalRadius;
-                    const y = this.centerY + Math.sin(angle) * finalRadius * 1.3;
+                // Right kidney
+                const rightKidneyCenterX = this.centerX + this.scale * 0.55;
+                const rightKidneyCenterY = this.centerY;
+                const rightOutline = getKidneyOutline(
+                    rightKidneyCenterX, rightKidneyCenterY,
+                    this.scale * 0.35, this.scale * 0.55, true
+                );
 
-                    points.push({ x, y });
+                // Distribute particles for left kidney
+                for (let i = 0; i < kidneysPerSide; i++) {
+                    if (i < kidneysPerSide * 0.5) {
+                        // Outline particles
+                        const pt = leftOutline[i % leftOutline.length];
+                        const jitter = 0.03;
+                        points.push({
+                            x: pt.x + (Math.random() - 0.5) * this.scale * jitter,
+                            y: pt.y + (Math.random() - 0.5) * this.scale * jitter
+                        });
+                    } else {
+                        // Fill particles
+                        const angle = Math.random() * Math.PI * 2;
+                        const r = Math.random() * 0.8;
+                        const hilumAngle = Math.PI;
+                        const angleDiff = Math.abs(angle - hilumAngle);
+                        const wrappedDiff = Math.min(angleDiff, Math.PI * 2 - angleDiff);
+                        let maxR = 1;
+                        if (wrappedDiff < 0.8) {
+                            maxR = 1 - Math.cos(wrappedDiff * Math.PI / 1.6) * 0.35;
+                        }
+                        const finalR = r * maxR;
+                        points.push({
+                            x: leftKidneyCenterX + Math.cos(angle) * this.scale * 0.35 * finalR,
+                            y: leftKidneyCenterY + Math.sin(angle) * this.scale * 0.55 * finalR
+                        });
+                    }
+                }
+
+                // Distribute particles for right kidney
+                for (let i = 0; i < kidneysPerSide; i++) {
+                    if (i < kidneysPerSide * 0.5) {
+                        // Outline particles
+                        const pt = rightOutline[i % rightOutline.length];
+                        const jitter = 0.03;
+                        points.push({
+                            x: pt.x + (Math.random() - 0.5) * this.scale * jitter,
+                            y: pt.y + (Math.random() - 0.5) * this.scale * jitter
+                        });
+                    } else {
+                        // Fill particles
+                        const angle = Math.random() * Math.PI * 2;
+                        const r = Math.random() * 0.8;
+                        const hilumAngle = 0;
+                        let angleDiff = Math.abs(angle - hilumAngle);
+                        if (angleDiff > Math.PI) angleDiff = Math.PI * 2 - angleDiff;
+                        let maxR = 1;
+                        if (angleDiff < 0.8) {
+                            maxR = 1 - Math.cos(angleDiff * Math.PI / 1.6) * 0.35;
+                        }
+                        const finalR = r * maxR;
+                        points.push({
+                            x: rightKidneyCenterX - Math.cos(angle) * this.scale * 0.35 * finalR,
+                            y: rightKidneyCenterY + Math.sin(angle) * this.scale * 0.55 * finalR
+                        });
+                    }
                 }
                 break;
 
