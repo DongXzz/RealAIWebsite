@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosmoFlow - REAL AI Lab</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .research-hero {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            background: #f7f8f9;
+            border-left: 3px solid #bcc3ca;
+            border-radius: 0 8px 8px 0;
+            padding: 2rem 2.5rem;
+        }
+
+        .research-hero .tagline {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .research-hero .subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-hero .links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .research-hero .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--sky-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .research-hero .links a:hover {
+            background: #4fa8d1;
+        }
+
+        .research-hero .links a.secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .research-hero .links a.secondary:hover {
+            border-color: var(--sky-blue);
+            color: var(--sky-blue);
+        }
+
+        .hero-image {
+            max-width: 100%;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 600px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .research-content {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .research-content h2 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 2.5rem 0 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--sky-blue);
+        }
+
+        .research-content h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .research-content p {
+            margin-bottom: 1rem;
+        }
+
+        .research-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            display: block;
+        }
+
+        .research-content em {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: -1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .research-content strong {
+            color: var(--text-primary);
+        }
+
+        .research-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .research-content th,
+        .research-content td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .research-content th {
+            background: var(--primary-100);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .team-section {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .team-section-title {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--sky-blue);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.25rem;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            border-color: var(--sky-blue);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .team-member .name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-member .affiliation {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-box {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-box a {
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-link::before {
+            content: '\2190';
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="../../index.html" class="logo">REAL AI</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../people.html">People</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../news.html">News</a></li>
+                <li><a href="../events.html">Events</a></li>
+                <li><a href="../give.html">Give</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Research Highlights</h1>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <a href="../../index.html#research" class="back-link">Back to Research</a>
+
+                <div class="research-hero">
+                    <p class="tagline">CosmoFlow: A Representation Learning Model for Dark Matter Studies</p>
+                    <p class="subtitle">CosmoFlow is a representation learning model for dark matter simulation data. It employs flow-matching, a state-of-the-art generative modeling approach, to learn low-dimensional representations of high-dimensional dark matter simulations. Compressed representations are 32x smaller than original data while maintaining high-fidelity reconstruction capability and encoding cosmological parameters.</p>
+                    <div class="links">
+                        <a href="https://arxiv.org/abs/2407.12843" target="_blank">Read Paper</a>
+                        <a href="https://github.com/sidk2/cosmoflow" target="_blank" class="secondary">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <img src="../../assets/images/research/cosmology/hero.png" alt="CosmoFlow dark matter simulation visualization">
+                </div>
+
+                <div class="research-content">
+                    <h2>The Problem</h2>
+                    <p>Modern cosmological simulations like AbacusSummit generate petabyte-scale datasets that are extremely expensive to store and analyze. This "big data problem" in cosmology creates a significant bottleneck for scientific discovery.</p>
+                    <p>Representation learning offers a solution through compact, interpretable dimensional reduction. CosmoFlow addresses this challenge by creating low-dimensional representations that encode essential scientific information while dramatically reducing data size.</p>
+
+                    <h2>About the Model</h2>
+                    <p>CosmoFlow uses a ResNet-based encoder to produce compressed fields and a UNet-based decoder for reconstruction. The model employs flow-matching, which iteratively denoises Gaussian noise to generate clean samples—similar to diffusion models but with improved efficiency.</p>
+
+                    <h3>Key Components</h3>
+                    <p><strong>ResNet Encoder</strong> - Compresses high-dimensional simulation data into compact latent representations that preserve scientific information.</p>
+                    <p><strong>UNet Decoder</strong> - Reconstructs full simulation fields from compressed representations with high fidelity and detail preservation.</p>
+                    <p><strong>Flow Matching</strong> - State-of-the-art generative approach that iteratively refines noise into clean reconstructed samples.</p>
+
+                    <img src="../../assets/images/research/cosmology/generation_process.png" alt="The generation process from noise to refined dark matter density field">
+                    <em>The generation process: from noise to refined dark matter density field through iterative flow-matching.</em>
+
+                    <h3>Progressive Unmasking Strategy</h3>
+                    <p>The model uses temporal masking during training and inference. The compressed field begins fully masked, progressively unmasking as flow-matching advances. This design embeds semantic meaning: different channels correspond to features at specific cosmological scales.</p>
+
+                    <img src="../../assets/images/research/cosmology/scale_manipulation.png" alt="Scale-selective manipulation demonstration">
+                    <em>Scale-selective manipulation: smoothed reconstructions via low-frequency channel manipulation demonstrate interpretable latent space.</em>
+
+                    <h2>Evaluation Results</h2>
+
+                    <h3>Reconstruction Performance</h3>
+                    <p>High-fidelity reconstructions are achieved with 32x compressed representations. The model captures large-scale structure and fine details, though some deviation occurs in intricate details.</p>
+
+                    <img src="../../assets/images/research/cosmology/reconstructions.png" alt="Original vs reconstructed simulation comparison">
+                    <em>Original simulation data (left) compared with CosmoFlow reconstruction (right), showing high-fidelity preservation of cosmic structure.</em>
+
+                    <h3>Cosmological Parameter Prediction</h3>
+                    <p>The compressed representations encode meaningful physical information, enabling accurate prediction of cosmological parameters with performance comparable to analyzing raw simulation data.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Input</th>
+                                <th>Ωm Error</th>
+                                <th>σ8 Error</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CNN</td>
+                                <td>Raw simulation data</td>
+                                <td>4.96%</td>
+                                <td>2.94%</td>
+                            </tr>
+                            <tr>
+                                <td>Feed-forward Network</td>
+                                <td>Compressed fields (32x smaller)</td>
+                                <td>5.24%</td>
+                                <td>4.03%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Synthetic Data Generation</h3>
+                    <p>The model enables interpolation at new cosmological parameter values without running expensive simulations. By averaging compressed fields from two simulations, we can produce intermediate fields comparable to simulations at averaged parameter values.</p>
+
+                    <img src="../../assets/images/research/cosmology/interpolation.png" alt="Parameter interpolation for synthetic data generation">
+                    <em>Synthetic data generation through parameter interpolation: generating dark matter fields at intermediate cosmological parameters.</em>
+                </div>
+
+                <div class="team-section">
+                    <h2 class="team-section-title">Research Team</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <p class="name">Sidharth Kannan</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Tian Qiu</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Carolina Cuesta-Lazaro</p>
+                            <p class="affiliation">NSF Institute for AI and Fundamental Interactions</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Haewon Jeong</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <p>Interested in this research? Contact us at <a href="mailto:skannan@ucsb.edu">skannan@ucsb.edu</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">REAL AI</span>
+                    <p>Reliable, Efficient, and Aligned AI</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="../news.html">News</a>
+                    <a href="../people.html">People</a>
+                    <a href="../publications.html">Publications</a>
+                    <a href="../events.html">Events</a>
+                    <a href="../give.html">Give</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 REAL AI, UC Santa Barbara. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

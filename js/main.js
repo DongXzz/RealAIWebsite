@@ -12,9 +12,9 @@ class MorphingBinary {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.particles = [];
-        this.particleCount = 400;
+        this.particleCount = 700;
         this.currentShape = 0;
-        this.shapes = ['grid', 'neuron', 'kidney', 'galaxy', 'text'];
+        this.shapes = ['grid', 'neuron', 'glucose', 'galaxy'];
         this.transitionProgress = 0;
         this.isFirstGrid = true;  // Track if we're in the initial grid phase
 
@@ -23,9 +23,14 @@ class MorphingBinary {
         this.stateStartTime = Date.now();
 
         // Timing
-        this.holdTime = 3000;      // Time to hold each shape
+        this.holdTime = 5000;      // Time to hold each shape (longer to show animations)
         this.scatterTime = 800;    // Time to scatter (short, since it's just a small neighborhood)
         this.formTime = 2500;      // Time to form new shape (with momentum)
+
+        // Shape-specific animation state
+        this.neuronSignalPhase = 0;    // For neuron signal propagation
+        this.glucoseTimeOffset = 0;    // For glucose real-time animation
+        this.galaxyRotation = 0;       // For galaxy rotation
 
         // For number flipping during initial grid only
         this.lastFlipTime = Date.now();
@@ -37,9 +42,50 @@ class MorphingBinary {
             darkBlue: '#3d8ab3' // Color for 0s (darker blue)
         };
 
+        // Galaxy image data for brightness-based placement
+        this.galaxyImageData = null;
+        this.galaxyImageLoaded = false;
+        this.loadGalaxyImage();
+
         this.init();
         this.animate();
         window.addEventListener('resize', () => this.resize());
+    }
+
+    // Load the galaxy image and extract brightness data
+    loadGalaxyImage() {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+            // Create an offscreen canvas to read pixel data
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = 64;
+            tempCanvas.height = 64;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(img, 0, 0, 64, 64);
+
+            // Extract pixel brightness data
+            const imageData = tempCtx.getImageData(0, 0, 64, 64);
+            this.galaxyImageData = [];
+
+            for (let y = 0; y < 64; y++) {
+                for (let x = 0; x < 64; x++) {
+                    const i = (y * 64 + x) * 4;
+                    // Calculate brightness (grayscale value)
+                    const r = imageData.data[i];
+                    const g = imageData.data[i + 1];
+                    const b = imageData.data[i + 2];
+                    const brightness = (r + g + b) / 3;
+                    this.galaxyImageData.push({
+                        x: x,
+                        y: y,
+                        brightness: brightness
+                    });
+                }
+            }
+            this.galaxyImageLoaded = true;
+        };
+        img.src = 'assets/images/hero/galaxy_image.jpg';
     }
 
     init() {
@@ -72,7 +118,7 @@ class MorphingBinary {
                 targetY: pos.y,
                 char: char,
                 color: char === '1' ? this.colors.blue : this.colors.darkBlue,
-                size: 10 + Math.random() * 3,
+                size: 8 + Math.random() * 2,
                 vx: 0,
                 vy: 0
             });
@@ -237,157 +283,126 @@ class MorphingBinary {
                 }
                 break;
 
-            case 'kidney':
-                // Single kidney with one downward blood vessel
-                const kidneyOutlineParticles = Math.floor(count * 0.55);  // More on outline
-                const kidneyFillParticles = Math.floor(count * 0.15);     // Less fill inside
-                const kidneyVesselParticles = count - kidneyOutlineParticles - kidneyFillParticles;
+            case 'glucose':
+                // Glucose time-series signal - realistic CGM-style waveform (no axes)
+                const signalPoints = [];
+                const gsc = this.scale * 1.1;
+                const gcx = this.centerX;
+                const gcy = this.centerY;
 
-                // Kidney outline points
-                const kidneyOutlinePoints = [];
-                const kidneyCX = this.centerX;
-                const kidneyCY = this.centerY - this.scale * 0.15;
-                const kidneySX = this.scale * 0.4;
-                const kidneySY = this.scale * 0.6;
+                const axisStartX = gcx - gsc * 0.9;
+                const axisEndX = gcx + gsc * 0.9;
 
-                // Generate kidney bean outline
-                for (let i = 0; i < 80; i++) {
-                    const t = (i / 80) * Math.PI * 2;
-                    let r = 1;
+                // Glucose signal - realistic pattern with meals and variations
+                const signalWidth = axisEndX - axisStartX;
+                const signalHeight = gsc * 1.0;  // Bigger vertical range
+                const baselineY = gcy + gsc * 0.25;  // Adjust baseline for bigger swings
 
-                    // Hilum indent on the right side
-                    const hilumAngle = 0;
-                    let angleDiff = Math.abs(t - hilumAngle);
-                    if (angleDiff > Math.PI) angleDiff = Math.PI * 2 - angleDiff;
+                // Generate realistic glucose curve points
+                for (let i = 0; i <= 200; i++) {
+                    const t = i / 200; // 0 to 1 across the signal
+                    const x = axisStartX + t * signalWidth;
 
-                    if (angleDiff < 0.7) {
-                        const indentStrength = Math.cos(angleDiff * Math.PI / 1.4) * 0.35;
-                        r = 1 - indentStrength;
-                    }
+                    // Combine multiple components for realistic glucose pattern
+                    let y = Math.sin(t * Math.PI * 2) * 0.15;  // Bigger base oscillation
 
-                    r += Math.sin(t * 4) * 0.02;
+                    // Meal spikes (3 meals: breakfast, lunch, dinner) - bigger peaks
+                    y += 0.55 * Math.exp(-Math.pow((t - 0.15) * 8, 2));
+                    y += 0.7 * Math.exp(-Math.pow((t - 0.45) * 7, 2));
+                    y += 0.6 * Math.exp(-Math.pow((t - 0.75) * 6, 2));
 
-                    kidneyOutlinePoints.push({
-                        x: kidneyCX + Math.cos(t) * kidneySX * r,
-                        y: kidneyCY + Math.sin(t) * kidneySY * r
-                    });
+                    // Small variations
+                    y += (Math.sin(t * 50) * 0.04 + Math.sin(t * 80) * 0.03);
+
+                    const canvasY = baselineY - y * signalHeight;
+                    signalPoints.push({ x: x, y: canvasY, t: t });
                 }
 
-                // Blood vessel - TWO clearly separate parallel lines
-                const kidneyVesselPts = [];
-                const hilumX = kidneyCX + kidneySX * 0.65;
-                const hilumY = kidneyCY;
-                const vesselEndY = this.centerY + this.scale * 0.85;
-
-                // Simple fixed offset between the two lines (in pixels)
-                const lineOffset = 25;
-
-                // LEFT LINE - curves out then down
-                for (let t = 0; t <= 1; t += 0.005) {
-                    const p0x = hilumX;
-                    const p0y = hilumY;
-                    const p1x = hilumX + this.scale * 0.4;
-                    const p1y = hilumY + this.scale * 0.25;
-                    const p2x = kidneyCX + this.scale * 0.15;
-                    const p2y = vesselEndY;
-
-                    const x = (1-t)*(1-t)*p0x + 2*(1-t)*t*p1x + t*t*p2x;
-                    const y = (1-t)*(1-t)*p0y + 2*(1-t)*t*p1y + t*t*p2y;
-                    kidneyVesselPts.push({ x, y });
-                }
-
-                // RIGHT LINE - exact same curve, just shifted right by lineOffset pixels
-                for (let t = 0; t <= 1; t += 0.005) {
-                    const p0x = hilumX + lineOffset;
-                    const p0y = hilumY;
-                    const p1x = hilumX + this.scale * 0.4 + lineOffset;
-                    const p1y = hilumY + this.scale * 0.25;
-                    const p2x = kidneyCX + this.scale * 0.15 + lineOffset;
-                    const p2y = vesselEndY;
-
-                    const x = (1-t)*(1-t)*p0x + 2*(1-t)*t*p1x + t*t*p2x;
-                    const y = (1-t)*(1-t)*p0y + 2*(1-t)*t*p1y + t*t*p2y;
-                    kidneyVesselPts.push({ x, y });
-                }
-
-                // Distribute particles for kidney outline
-                for (let i = 0; i < kidneyOutlineParticles; i++) {
-                    const pt = kidneyOutlinePoints[i % kidneyOutlinePoints.length];
-                    const jitter = 0.02;
+                // Distribute all particles on the signal line
+                for (let i = 0; i < count; i++) {
+                    const pt = signalPoints[i % signalPoints.length];
+                    const jitter = 2;
                     points.push({
-                        x: pt.x + (Math.random() - 0.5) * this.scale * jitter,
-                        y: pt.y + (Math.random() - 0.5) * this.scale * jitter
-                    });
-                }
-
-                // Sparse fill particles inside kidney
-                for (let i = 0; i < kidneyFillParticles; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const r = Math.random() * 0.6;
-                    let angleDiff = Math.abs(angle - 0);
-                    if (angleDiff > Math.PI) angleDiff = Math.PI * 2 - angleDiff;
-                    let maxR = 1;
-                    if (angleDiff < 0.7) {
-                        maxR = 1 - Math.cos(angleDiff * Math.PI / 1.4) * 0.35;
-                    }
-                    const finalR = r * maxR;
-                    points.push({
-                        x: kidneyCX + Math.cos(angle) * kidneySX * finalR,
-                        y: kidneyCY + Math.sin(angle) * kidneySY * finalR
-                    });
-                }
-
-                // Distribute particles for the blood vessel
-                for (let i = 0; i < kidneyVesselParticles; i++) {
-                    const pt = kidneyVesselPts[i % kidneyVesselPts.length];
-                    const jitter = 0.008;
-                    points.push({
-                        x: pt.x + (Math.random() - 0.5) * this.scale * jitter,
-                        y: pt.y + (Math.random() - 0.5) * this.scale * jitter
+                        x: pt.x + (Math.random() - 0.5) * jitter,
+                        y: pt.y + (Math.random() - 0.5) * jitter,
+                        t: pt.t  // Store position along signal for animation
                     });
                 }
                 break;
 
             case 'galaxy':
-                // Spiral galaxy: dense center with spiral arms extending outward
-                const numArms = 2;
-                const armParticles = Math.floor(count * 0.7);
-                const coreParticles = count - armParticles;
+                // Image-based galaxy: place digits where brightness is above threshold
+                if (this.galaxyImageLoaded && this.galaxyImageData) {
+                    // Filter pixels above brightness threshold (dark background is ~0-40)
+                    const brightnessThreshold = 45;
+                    const brightPixels = this.galaxyImageData.filter(p => p.brightness > brightnessThreshold);
 
-                // Dense central core/bulge
-                for (let i = 0; i < coreParticles; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    // Gaussian-like distribution for core density
-                    const r = this.scale * 0.25 * Math.sqrt(-2 * Math.log(Math.random() + 0.01));
-                    const coreR = Math.min(r, this.scale * 0.3);
-                    points.push({
-                        x: this.centerX + Math.cos(angle) * coreR,
-                        y: this.centerY + Math.sin(angle) * coreR * 0.5 // Flatten for inclination
-                    });
-                }
+                    // Sort by brightness to ensure we sample across the full range
+                    brightPixels.sort((a, b) => b.brightness - a.brightness);
 
-                // Spiral arms
-                for (let i = 0; i < armParticles; i++) {
-                    const arm = i % numArms;
-                    const progressInArm = Math.floor(i / numArms) / (armParticles / numArms);
+                    // Scale factor: map 64x64 image to canvas scale
+                    const imageSize = 64;
+                    const scaleFactor = (this.scale * 2) / imageSize;
 
-                    // Logarithmic spiral: r = a * e^(b * theta)
-                    const armOffset = (arm / numArms) * Math.PI * 2;
-                    const spiralTightness = 0.3;
-                    const maxRotations = 1.5;
+                    // Select pixels for particles, evenly distributed across brightness levels
+                    const selectedPixels = [];
+                    const step = Math.max(1, Math.floor(brightPixels.length / count));
 
-                    const theta = progressInArm * Math.PI * 2 * maxRotations + armOffset;
-                    const r = this.scale * (0.15 + progressInArm * 0.85);
+                    for (let i = 0; i < count && i * step < brightPixels.length; i++) {
+                        selectedPixels.push(brightPixels[i * step]);
+                    }
 
-                    // Add spread to arms (wider at edges)
-                    const spread = 0.05 + progressInArm * 0.15;
-                    const spreadX = (Math.random() - 0.5) * this.scale * spread;
-                    const spreadY = (Math.random() - 0.5) * this.scale * spread * 0.5;
+                    // If we need more particles, add some random ones from bright pixels
+                    while (selectedPixels.length < count && brightPixels.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * brightPixels.length);
+                        selectedPixels.push(brightPixels[randomIndex]);
+                    }
 
-                    points.push({
-                        x: this.centerX + Math.cos(theta) * r + spreadX,
-                        y: this.centerY + Math.sin(theta) * r * 0.5 + spreadY // Flatten for inclination
-                    });
+                    // Convert image coordinates to canvas coordinates and store brightness
+                    for (let i = 0; i < count; i++) {
+                        const pixel = selectedPixels[i % selectedPixels.length];
+                        // Center the image on canvas
+                        const x = this.centerX + (pixel.x - imageSize / 2) * scaleFactor;
+                        const y = this.centerY + (pixel.y - imageSize / 2) * scaleFactor;
+
+                        // Add slight jitter for natural look
+                        const jitter = scaleFactor * 0.3;
+                        points.push({
+                            x: x + (Math.random() - 0.5) * jitter,
+                            y: y + (Math.random() - 0.5) * jitter,
+                            brightness: pixel.brightness  // Store brightness for 0/1 assignment
+                        });
+                    }
+                } else {
+                    // Fallback: mathematical spiral if image not loaded
+                    const numArms = 2;
+                    const armParticles = Math.floor(count * 0.7);
+                    const coreParticles = count - armParticles;
+
+                    for (let i = 0; i < coreParticles; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const r = this.scale * 0.25 * Math.sqrt(-2 * Math.log(Math.random() + 0.01));
+                        const coreR = Math.min(r, this.scale * 0.3);
+                        points.push({
+                            x: this.centerX + Math.cos(angle) * coreR,
+                            y: this.centerY + Math.sin(angle) * coreR * 0.5
+                        });
+                    }
+
+                    for (let i = 0; i < armParticles; i++) {
+                        const arm = i % numArms;
+                        const progressInArm = Math.floor(i / numArms) / (armParticles / numArms);
+                        const armOffset = (arm / numArms) * Math.PI * 2;
+                        const theta = progressInArm * Math.PI * 2 * 1.5 + armOffset;
+                        const r = this.scale * (0.15 + progressInArm * 0.85);
+                        const spread = 0.05 + progressInArm * 0.15;
+                        const spreadX = (Math.random() - 0.5) * this.scale * spread;
+                        const spreadY = (Math.random() - 0.5) * this.scale * spread * 0.5;
+                        points.push({
+                            x: this.centerX + Math.cos(theta) * r + spreadX,
+                            y: this.centerY + Math.sin(theta) * r * 0.5 + spreadY
+                        });
+                    }
                 }
                 break;
 
@@ -538,17 +553,16 @@ class MorphingBinary {
 
     // Check if we should scatter between current shape and next shape
     shouldScatter() {
-        // Shapes: 0=grid, 1=brain, 2=kidney, 3=galaxy, 4=text
-        // Only scatter between intermediate shapes (brain→kidney, kidney→galaxy)
-        // No scatter: grid→brain (0→1) or galaxy→text (3→4)
-        if (this.currentShape === 0) return false;  // grid → brain: no scatter
-        if (this.currentShape === 3) return false;  // galaxy → text: no scatter
+        // Shapes: 0=grid, 1=neuron, 2=glucose, 3=galaxy
+        // Only scatter between intermediate shapes (neuron→glucose, glucose→galaxy)
+        // No scatter: grid→neuron (0→1)
+        if (this.currentShape === 0) return false;  // grid → neuron: no scatter
         return true;
     }
 
-    // Check if animation should stop (at final text shape)
+    // Check if animation should stop (at final galaxy shape)
     isAtFinalShape() {
-        return this.currentShape === 4; // text is the final shape
+        return this.currentShape === 3; // galaxy is the final shape
     }
 
     startScattering() {
@@ -582,6 +596,19 @@ class MorphingBinary {
             const target = newPositions[i] || { x: this.centerX, y: this.centerY };
             p.targetX = target.x;
             p.targetY = target.y;
+
+            // For galaxy shape, assign 0/1 based on brightness from image
+            if (shapeName === 'galaxy' && target.brightness !== undefined) {
+                // Brighter pixels get '1', darker visible pixels get '0'
+                const midBrightness = 120;
+                p.char = target.brightness > midBrightness ? '1' : '0';
+                this.updateParticleColor(p);
+            }
+
+            // For glucose shape, store the signal position for animation
+            if (shapeName === 'glucose' && target.t !== undefined) {
+                p.signalT = target.t;
+            }
         });
         this.state = 'forming';
         this.stateStartTime = Date.now();
@@ -594,10 +621,11 @@ class MorphingBinary {
 
         // State machine
         if (this.state === 'holding') {
-            // Flip numbers whenever we're holding at the grid shape
-            if (this.currentShape === 0) {
+            const shapeName = this.shapes[this.currentShape];
+
+            // Grid shape: random number flipping
+            if (shapeName === 'grid') {
                 if (now - this.lastFlipTime > this.flipInterval) {
-                    // Flip multiple numbers at once for faster effect
                     for (let f = 0; f < this.flipsPerFrame; f++) {
                         const randomIndex = Math.floor(Math.random() * this.particles.length);
                         const p = this.particles[randomIndex];
@@ -608,24 +636,95 @@ class MorphingBinary {
                 }
             }
 
+            // Neuron shape: signal propagation from axon terminals (right) to dendrites (left)
+            if (shapeName === 'neuron') {
+                this.neuronSignalPhase += 0.004;  // Much slower signal propagation
+                const signalWidth = 0.15; // Width of the "active" signal band
+
+                this.particles.forEach(p => {
+                    // Normalize x position (0 = left/dendrites, 1 = right/axon terminals)
+                    const normalizedX = (p.targetX - (this.centerX - this.scale)) / (this.scale * 2);
+
+                    // Signal travels from right to left (1 to 0)
+                    const signalPos = 1 - (this.neuronSignalPhase % 1.3); // Cycling signal position
+                    const distFromSignal = Math.abs(normalizedX - signalPos);
+
+                    // Particles near the signal become '1', others become '0'
+                    if (distFromSignal < signalWidth) {
+                        p.char = '1';
+                    } else {
+                        p.char = '0';
+                    }
+                    this.updateParticleColor(p);
+                });
+            }
+
+            // Glucose shape: real-time signal animation with dynamic shape changes
+            if (shapeName === 'glucose') {
+                this.glucoseTimeOffset += 0.002;  // Slow animation
+                const baseAmplitude = 12;
+
+                this.particles.forEach(p => {
+                    const t = p.signalT || 0;
+
+                    // Multiple wave components for more organic movement
+                    // Wave 1: Traveling wave (moves along the signal like new data coming in)
+                    const travelingWave = Math.sin((t * 3 - this.glucoseTimeOffset * 2) * Math.PI * 2) * baseAmplitude;
+
+                    // Wave 2: Breathing/pulsing effect (whole signal expands/contracts)
+                    const breathingWave = Math.sin(this.glucoseTimeOffset * 0.8) * 6;
+
+                    // Wave 3: Peak modulation (peaks grow and shrink)
+                    const peakMod = Math.sin(this.glucoseTimeOffset * 0.5) * 0.3 + 1;
+                    const isPeak = (t > 0.1 && t < 0.2) || (t > 0.4 && t < 0.5) || (t > 0.7 && t < 0.8);
+                    const peakEffect = isPeak ? (peakMod - 1) * 25 : 0;
+
+                    // Combine all effects
+                    p.y = p.targetY + travelingWave + breathingWave - peakEffect;
+                    p.x = p.targetX;
+
+                    // Dynamic 0/1 based on position in the traveling wave
+                    const wavePhase = Math.sin((t * 3 - this.glucoseTimeOffset * 2) * Math.PI * 2);
+                    p.char = wavePhase > 0 ? '1' : '0';
+                    this.updateParticleColor(p);
+                });
+            }
+
+            // Galaxy shape: slow rotation
+            if (shapeName === 'galaxy') {
+                this.galaxyRotation += 0.0005; // Very slow rotation speed
+                const cosR = Math.cos(this.galaxyRotation);
+                const sinR = Math.sin(this.galaxyRotation);
+
+                this.particles.forEach(p => {
+                    // Rotate around center
+                    const dx = p.targetX - this.centerX;
+                    const dy = p.targetY - this.centerY;
+                    p.x = this.centerX + dx * cosR - dy * sinR;
+                    p.y = this.centerY + dx * sinR + dy * cosR;
+                });
+            }
+
+            // For shapes without special animation, keep at target
+            if (shapeName === 'grid') {
+                this.particles.forEach(p => {
+                    p.x = p.targetX;
+                    p.y = p.targetY;
+                });
+            }
+
             // After hold time, either scatter or go directly to next shape
-            // But stop if we're at the final text shape
-            if (stateElapsed > this.holdTime && !this.isAtFinalShape()) {
+            // Grid shape has shorter hold time (half)
+            const currentHoldTime = (shapeName === 'grid') ? this.holdTime / 2 : this.holdTime;
+            if (stateElapsed > currentHoldTime && !this.isAtFinalShape()) {
                 if (this.shouldScatter()) {
                     this.startScattering();
                 } else {
-                    // Direct transition without scattering
                     this.isFirstGrid = false;
                     this.currentShape = this.currentShape + 1;
                     this.startForming(this.currentShape);
                 }
             }
-
-            // Keep particles at their targets (no jitter)
-            this.particles.forEach(p => {
-                p.x = p.targetX;
-                p.y = p.targetY;
-            });
 
         } else if (this.state === 'scattering') {
             this.transitionProgress = Math.min(1, stateElapsed / this.scatterTime);

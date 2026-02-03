@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriBench - REAL AI Lab</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .research-hero {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            background: #f7f8f9;
+            border-left: 3px solid #bcc3ca;
+            border-radius: 0 8px 8px 0;
+            padding: 2rem 2.5rem;
+        }
+
+        .research-hero .tagline {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .research-hero .subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-hero .links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .research-hero .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--sky-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .research-hero .links a:hover {
+            background: #4fa8d1;
+        }
+
+        .research-hero .links a.secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .research-hero .links a.secondary:hover {
+            border-color: var(--sky-blue);
+            color: var(--sky-blue);
+        }
+
+        .hero-image {
+            max-width: 100%;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 700px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image em {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        .research-content {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .research-content h2 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 2.5rem 0 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--sky-blue);
+        }
+
+        .research-content h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .research-content h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .research-content p {
+            margin-bottom: 1rem;
+        }
+
+        .research-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            display: block;
+        }
+
+        .research-content strong {
+            color: var(--text-primary);
+        }
+
+        .research-content ul,
+        .research-content ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .research-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .research-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .research-content th,
+        .research-content td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .research-content th {
+            background: var(--primary-100);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .research-content td {
+            color: var(--text-secondary);
+        }
+
+        .team-section {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .team-section-title {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--sky-blue);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.25rem;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            border-color: var(--sky-blue);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member .name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-member .affiliation {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-box {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-box p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .contact-box a {
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            transition: gap 0.2s ease;
+        }
+
+        .back-link:hover {
+            gap: 0.75rem;
+        }
+
+        .back-link::before {
+            content: '\2190';
+        }
+
+        .updates-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .updates-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .updates-list li:last-child {
+            border-bottom: none;
+        }
+
+        .highlight-box {
+            background: #f0f7fa;
+            border-left: 3px solid var(--sky-blue);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+        }
+
+        .country-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .country-tag {
+            background: var(--primary-100);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .research-hero {
+                padding: 1.5rem 1.25rem;
+                border-radius: 0 6px 6px 0;
+            }
+
+            .research-hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            .research-content table {
+                font-size: 0.85rem;
+            }
+
+            .research-content th,
+            .research-content td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="../../index.html" class="logo">REAL AI</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../people.html">People</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../news.html">News</a></li>
+                <li><a href="../events.html">Events</a></li>
+                <li><a href="../give.html">Give</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Research Highlights</h1>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <a href="../../index.html#research" class="back-link">Back to Research</a>
+
+                <div class="research-hero">
+                    <p class="tagline">NutriBench: Evaluating LLMs on Nutrition Estimation</p>
+                    <p class="subtitle">NUTRIBENCH is the first publicly available dataset of 11,857 human-verified meal descriptions annotated with macronutrient labels, designed to evaluate large language models (LLMs) on nutrition estimation. We benchmark twelve LLMs, compare their performance to professional nutritionists, and assess real-world health impacts through blood glucose management simulations in individuals with diabetes.</p>
+                    <div class="links">
+                        <a href="https://arxiv.org/abs/2407.12843" target="_blank">Read Paper</a>
+                        <a href="https://github.com/DongXzz/NutriBench" target="_blank" class="secondary">GitHub</a>
+                        <a href="https://huggingface.co/datasets/dongx1997/NutriBench" target="_blank" class="secondary">Dataset</a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <img src="https://images.squarespace-cdn.com/content/v1/6529d70c4ba176269ec562d6/ac9a4641-705d-46b7-b329-221cc33f9b55/bg_trace.png" alt="Simulated glucose traces comparing GPT-4o vs. nutritionist estimates">
+                    <em>Simulated blood glucose traces comparing GPT-4o estimates vs. nutritionist estimates for diabetes management.</em>
+                </div>
+
+                <div class="research-content">
+                    <h2>The Problem</h2>
+                    <p>Accurate carbohydrate estimation is critical for individuals with diabetes who must calculate insulin doses based on meal content. However, nutrition estimation is challenging even for trained professionals, and errors can lead to dangerous blood glucose fluctuations.</p>
+                    <p>Can large language models provide accurate, fast nutrition estimates that improve diabetes management? NutriBench provides the first comprehensive benchmark to answer this question.</p>
+
+                    <h2>Dataset Overview</h2>
+                    <p>NutriBench contains <strong>11,857 human-verified meal descriptions</strong> with macronutrient annotations, representing diverse global dietary patterns.</p>
+
+                    <h3>Global Coverage</h3>
+                    <img src="https://images.squarespace-cdn.com/content/v1/6529d70c4ba176269ec562d6/2147efb6-d0af-4dbf-bd13-2c88d92acb3e/world_map.png" alt="World map showing NutriBench data sources across 11 countries">
+
+                    <p>Data sourced from dietary intake databases spanning 11 countries:</p>
+                    <div class="country-list">
+                        <span class="country-tag">Argentina</span>
+                        <span class="country-tag">Bulgaria</span>
+                        <span class="country-tag">Ethiopia</span>
+                        <span class="country-tag">India</span>
+                        <span class="country-tag">Italy</span>
+                        <span class="country-tag">Mexico</span>
+                        <span class="country-tag">Nigeria</span>
+                        <span class="country-tag">Peru</span>
+                        <span class="country-tag">Philippines</span>
+                        <span class="country-tag">Sri Lanka</span>
+                        <span class="country-tag">United States</span>
+                    </div>
+
+                    <h3>Data Sources</h3>
+                    <ul>
+                        <li><strong>What We Eat in America (WWEIA)</strong> - National dietary intake survey</li>
+                        <li><strong>FAO/WHO Gift databases</strong> - Global dietary data from multiple countries</li>
+                    </ul>
+
+                    <p>Version 2 expanded coverage to <strong>24 countries</strong> with improved meal diversity.</p>
+
+                    <h2>Methodology</h2>
+
+                    <h3>Data Generation Process</h3>
+                    <ol>
+                        <li>Meal data extracted from real dietary intake databases</li>
+                        <li>GPT-4o-mini used to generate natural language descriptions</li>
+                        <li>Human verification conducted to eliminate hallucinations</li>
+                    </ol>
+
+                    <h3>LLM Evaluation</h3>
+                    <p>We benchmarked <strong>12 models</strong> across different categories:</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Models</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Open-source</td>
+                                <td>Llama 3.1 (8B/70B/405B), Llama 3 (8B/70B), Gemma 2 (9B/27B), Qwen 2 (7B/70B)</td>
+                            </tr>
+                            <tr>
+                                <td>Closed-source</td>
+                                <td>GPT-4o, GPT-4o mini</td>
+                            </tr>
+                            <tr>
+                                <td>Medical-specialized</td>
+                                <td>OpenBioLLM-70B</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Prompting Strategies</h3>
+                    <p>Four prompting approaches were tested:</p>
+                    <ol>
+                        <li><strong>Baseline</strong> - Standard instructional prompting</li>
+                        <li><strong>Chain-of-Thought (CoT)</strong> - Step-by-step reasoning</li>
+                        <li><strong>Retrieval Augmented Generation (RAG)</strong> - Database-enhanced responses</li>
+                        <li><strong>RAG+CoT</strong> - Combined approach</li>
+                    </ol>
+
+                    <img src="https://images.squarespace-cdn.com/content/v1/6529d70c4ba176269ec562d6/3a1b665b-57ca-4ef5-a54c-fa946ecd1d93/prompt.png" alt="GPT-4o output across four prompting strategies">
+
+                    <h2>Key Results</h2>
+
+                    <img src="https://images.squarespace-cdn.com/content/v1/6529d70c4ba176269ec562d6/b01d4b7c-de20-4f0e-8498-f5a6a7ef386e/main_fig.png" alt="Accuracy and answer rate results across LLMs">
+
+                    <div class="highlight-box">
+                        <p><strong>GPT-4o with Chain-of-Thought achieved 66.82% accuracy</strong> (absolute error &lt;7g carbohydrates) with a 99.16% answer rate, providing more accurate and faster predictions than professional nutritionists.</p>
+                    </div>
+
+                    <h3>Clinical Impact Simulation</h3>
+                    <p>We assessed real-world health impacts through blood glucose management simulations:</p>
+                    <ul>
+                        <li><strong>44,800 scenarios</strong> simulated using Type 1 diabetes models</li>
+                        <li>GPT-4o estimates resulted in <strong>lowest blood glucose risk</strong></li>
+                        <li>Achieved <strong>highest time in safe glucose range</strong> (70-180 mg/dl)</li>
+                        <li><strong>Outperformed nutritionist estimates</strong> in diabetes management simulations</li>
+                    </ul>
+
+                    <h2>Recent Updates</h2>
+                    <ul class="updates-list">
+                        <li><strong>April 2025:</strong> NutriBench v2 release with 24-country support</li>
+                        <li><strong>March 2025:</strong> SMS/WhatsApp carbohydrate estimation service launched</li>
+                        <li><strong>February 2025:</strong> Accepted at ICLR 2025 conference</li>
+                        <li><strong>October 2024:</strong> Initial NutriBench v1 release</li>
+                    </ul>
+
+                    <h2>Resources</h2>
+                    <ul>
+                        <li><strong>Dataset:</strong> <a href="https://huggingface.co/datasets/dongx1997/NutriBench" target="_blank">Hugging Face (dongx1997/NutriBench)</a></li>
+                        <li><strong>Code:</strong> <a href="https://github.com/DongXzz/NutriBench" target="_blank">GitHub (DongXzz/NutriBench)</a></li>
+                        <li><strong>Paper:</strong> <a href="https://arxiv.org/abs/2407.12843" target="_blank">arXiv:2407.12843</a></li>
+                    </ul>
+                </div>
+
+                <div class="team-section">
+                    <h2 class="team-section-title">Research Team</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <img src="https://images.squarespace-cdn.com/content/v1/6529d70c4ba176269ec562d6/6cc5ba03-ace4-4a4a-9d02-6131577cea24/Andong_Hua.jpg?format=300w" alt="Andong Hua">
+                            <p class="name">Andong Hua</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://images.squarespace-cdn.com/content/v1/6529d70c4ba176269ec562d6/e21a1ea6-47e3-44dd-bffe-82f122430290/Mehak_Dhaliwal.jpg?format=300w" alt="Mehak Preet Dhaliwal">
+                            <p class="name">Mehak Preet Dhaliwal</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Laya Pullela</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Ryan Burke</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Yao Qin</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <p>Interested in this research? Contact us at <a href="mailto:dongx1997@ucsb.edu">dongx1997@ucsb.edu</a> or <a href="mailto:mdhaliwal@ucsb.edu">mdhaliwal@ucsb.edu</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">REAL AI</span>
+                    <p>Reliable, Efficient, and Aligned AI</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="../news.html">News</a>
+                    <a href="../people.html">People</a>
+                    <a href="../publications.html">Publications</a>
+                    <a href="../events.html">Events</a>
+                    <a href="../give.html">Give</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 REAL AI, UC Santa Barbara. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

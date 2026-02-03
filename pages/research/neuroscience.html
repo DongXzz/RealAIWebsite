@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Twins of the Brain - REAL AI Lab</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .research-hero {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            background: #f7f8f9;
+            border-left: 3px solid #bcc3ca;
+            border-radius: 0 8px 8px 0;
+            padding: 2rem 2.5rem;
+        }
+
+        .research-hero .tagline {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .research-hero .subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-hero .links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .research-hero .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--sky-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .research-hero .links a:hover {
+            background: #4fa8d1;
+        }
+
+        .research-hero .links a.secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .research-hero .links a.secondary:hover {
+            border-color: var(--sky-blue);
+            color: var(--sky-blue);
+        }
+
+        .hero-image {
+            max-width: 100%;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 600px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .research-content {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .research-content h2 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 2.5rem 0 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--sky-blue);
+        }
+
+        .research-content h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+        }
+
+        .research-content h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .research-content p {
+            margin-bottom: 1rem;
+        }
+
+        .research-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            display: block;
+        }
+
+        .research-content em {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: -1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .research-content strong {
+            color: var(--text-primary);
+        }
+
+        .research-content ul,
+        .research-content ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        .research-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .team-section {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .team-section-title {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--sky-blue);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.25rem;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            border-color: var(--sky-blue);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .team-member .name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-member .affiliation {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-box {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-box p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+
+        .contact-box a {
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--sky-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            transition: gap 0.2s ease;
+        }
+
+        .back-link:hover {
+            gap: 0.75rem;
+        }
+
+        .back-link::before {
+            content: '\2190';
+        }
+
+        .updates-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .updates-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .updates-list li:last-child {
+            border-bottom: none;
+        }
+
+        .publication-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+
+        .publication-item h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-item .authors {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .research-hero {
+                padding: 1.5rem 1.25rem;
+                border-radius: 0 6px 6px 0;
+            }
+
+            .research-hero .tagline {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="../../index.html" class="logo">REAL AI</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../people.html">People</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../news.html">News</a></li>
+                <li><a href="../events.html">Events</a></li>
+                <li><a href="../give.html">Give</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Research Highlights</h1>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <a href="../../index.html#research" class="back-link">Back to Research</a>
+
+                <div class="research-hero">
+                    <p class="tagline">Digital Twins of the Brain</p>
+                    <p class="subtitle">We build digital twins of brain circuits using artificial neural networks. This approach allows scientists to test hypotheses computationally before validating them in living organisms. Our digital twins have already replicated key biological findings and generated new predictions about memory and navigation that collaborators are now verifying experimentally.</p>
+                    <div class="links">
+                        <a href="https://www.ai.ece.ucsb.edu/braintwins" target="_blank">Project Website</a>
+                    </div>
+                </div>
+
+                <div class="research-content">
+                    <h2>The Problem</h2>
+                    <p>Neuroscience experiments are crucial to advance our understanding of the brain, but they are time-consuming, costly, and limited in scope. Traditional approaches require extensive laboratory work with living organisms, creating bottlenecks in hypothesis testing and discovery.</p>
+                    <p>Digital twins offer a transformative solution: artificial neural network models that replicate brain circuit behavior, enabling rapid computational experimentation before biological validation.</p>
+
+                    <h2>Our Approach</h2>
+                    <p>We propose building digital twins of brain circuits using artificial neural networks. These computational models allow scientists to test hypotheses rapidly and at scale, generating predictions that collaborators then verify experimentally in living organisms.</p>
+
+                    <h3>Research Focus Areas</h3>
+                    <p><strong>Memory Circuits</strong> - We develop recurrent neural networks as computational models of short-term memory circuits. Our work reveals candidate mechanisms for how brains briefly store information, distilling findings into analytical laws.</p>
+                    <p><strong>Navigation Systems</strong> - Using dynamic latent-variable models, we construct digital twins of spatial navigation circuits. These models reveal how neural populations encode both spatial and abstract representations.</p>
+
+                    <h2>Memory Research</h2>
+                    <p>Our digital twins of memory circuits use recurrent neural networks to model how the brain temporarily stores information. This research has revealed fundamental mechanisms underlying short-term memory.</p>
+
+                    <h3>Key Findings</h3>
+                    <p><strong>Geometric Restructuring</strong> - We discovered how memory organization in neural networks undergoes geometric restructuring, providing insights into the computational principles of biological memory systems.</p>
+                    <p><strong>Dynamical Phases</strong> - Our work identified two distinct dynamical regimes that sustain memory capabilities in recurrent networks, offering new understanding of how memories persist over time.</p>
+
+                    <h2>Navigation Research</h2>
+                    <p>Spatial navigation is a fundamental cognitive function that involves complex neural computations. Our digital twins model how the brain represents space and guides movement.</p>
+
+                    <h3>Key Findings</h3>
+                    <p><strong>Multi-Agent Tracking</strong> - We examined how navigation networks adapt when tracking multiple agents simultaneously, revealing that internal representations differ fundamentally from single-agent scenarios.</p>
+                    <p><strong>Reward Integration</strong> - Our research demonstrates how artificial networks integrate spatial and reward information in navigation codes, showing global distortions arising from local reward signals.</p>
+
+                    <h2>Recent Updates</h2>
+                    <ul class="updates-list">
+                        <li><strong>July 2025:</strong> NeurReps workshop accepted at NeurIPS 2025</li>
+                        <li><strong>June 2025:</strong> Short-term memory digital twin datasets released on Zenodo</li>
+                        <li><strong>May 2025:</strong> Short-term memory digital twin paper accepted at ICML 2025</li>
+                        <li><strong>December 2024:</strong> Two navigation-focused papers accepted to NeurIPS 2024</li>
+                    </ul>
+
+                    <h2>Selected Publications</h2>
+
+                    <div class="publication-item">
+                        <h4>Understanding and Controlling the Geometry of Memory Organization in RNNs (2025)</h4>
+                        <p class="authors">Haputhanthri, U., Storan, L., Jiang, Y., Raheja, T., Shai, A., Akengin, O., Miolane, N., Schnitzer, M. J., Dinc, F., & Tanaka, H.</p>
+                        <p>Focuses on geometric restructuring in digital twins supporting short-term memory.</p>
+                    </div>
+
+                    <div class="publication-item">
+                        <h4>Dynamical Phases of Short-Term Memory Mechanisms in RNNs (ICML 2025)</h4>
+                        <p class="authors">Kurtkaya, B., Dinc, F., Yuksekgonul, M., Blanco-Pozo, M., Cirakman, E., Schnitzer, M., Yemez, Y., Tanaka, H., Yuan, P., & Miolane, N.</p>
+                        <p>Identifies two distinct dynamical regimes sustaining memory capabilities.</p>
+                    </div>
+
+                    <div class="publication-item">
+                        <h4>Not So Griddy: Internal Representations of RNNs Path Integrating More Than One Agent (NeurIPS 2024)</h4>
+                        <p class="authors">Redman, W., Acosta, F., Acosta-Mendoza, S., Miolane, N.</p>
+                        <p>Examines how navigation networks adapt when tracking multiple agents simultaneously.</p>
+                    </div>
+
+                    <div class="publication-item">
+                        <h4>Global Distortions from Local Rewards: Neural Coding Strategies in Path-Integrating Neural Systems (NeurIPS 2024)</h4>
+                        <p class="authors">Acosta, F., Dinc, F., Redman, W., Madhav, M., Klindt, D., Miolane, N.</p>
+                        <p>Demonstrates how artificial networks integrate spatial and reward information in navigation codes.</p>
+                    </div>
+                </div>
+
+                <div class="team-section">
+                    <h2 class="team-section-title">Research Team</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <p class="name">Nina Miolane</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Fatih Dinc</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Francisco Acosta</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Bariscan Kurtkaya</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                        <div class="team-member">
+                            <p class="name">Abby Bertics</p>
+                            <p class="affiliation">UC Santa Barbara</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-box">
+                    <p>Interested in this research? Contact us at <a href="mailto:ninamiolane@ucsb.edu">ninamiolane@ucsb.edu</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">REAL AI</span>
+                    <p>Reliable, Efficient, and Aligned AI</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="../news.html">News</a>
+                    <a href="../people.html">People</a>
+                    <a href="../publications.html">Publications</a>
+                    <a href="../events.html">Events</a>
+                    <a href="../give.html">Give</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 REAL AI, UC Santa Barbara. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>
