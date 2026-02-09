@@ -129,8 +129,9 @@ nav {
 
 .logo-group {
     display: flex;
-    align-items: center;
-    gap: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
 }
 
 .ucsb-logo {
@@ -139,8 +140,9 @@ nav {
 }
 
 .ucsb-logo img {
-    height: 28px;
+    height: 14px;
     width: auto;
+    opacity: 0.7;
 }
 
 .logo {
