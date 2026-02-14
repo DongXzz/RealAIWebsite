@@ -638,23 +638,67 @@ class MorphingBinary {
 
             // Neuron shape: signal propagation from axon terminals (right) to dendrites (left)
             if (shapeName === 'neuron') {
-                this.neuronSignalPhase += 0.004;  // Much slower signal propagation
-                const signalWidth = 0.15; // Width of the "active" signal band
+                this.neuronSignalPhase += 0.005;  // Signal speed
+                const signalWidth = 0.04; // Narrow signal band
+                const cycleLength = 2.2; // Full cycle
+                const phase = this.neuronSignalPhase % cycleLength;
+
+                // Soma position (where axon meets cell body)
+                const somaX = 0.45;
 
                 this.particles.forEach(p => {
                     // Normalize x position (0 = left/dendrites, 1 = right/axon terminals)
                     const normalizedX = (p.targetX - (this.centerX - this.scale)) / (this.scale * 2);
 
-                    // Signal travels from right to left (1 to 0)
-                    const signalPos = 1 - (this.neuronSignalPhase % 1.3); // Cycling signal position
-                    const distFromSignal = Math.abs(normalizedX - signalPos);
+                    let isLit = false;
 
-                    // Particles near the signal become '1', others become '0'
-                    if (distFromSignal < signalWidth) {
-                        p.char = '1';
-                    } else {
-                        p.char = '0';
+                    // Phase 1: Signal travels from axon terminal (right) to soma (0 to 1.0)
+                    if (phase < 1.0) {
+                        const signalPos = 1 - (phase / 1.0) * (1 - somaX); // Move from 1.0 to somaX
+                        const distFromSignal = Math.abs(normalizedX - signalPos);
+                        if (distFromSignal < signalWidth) {
+                            isLit = true;
+                        }
                     }
+                    // Phase 2: Signal spreads through soma and into dendrites (1.0 to 1.8)
+                    else if (phase < 1.8) {
+                        const dendritePhase = (phase - 1.0) / 0.8; // 0 to 1 during this phase
+                        const signalPos = somaX - dendritePhase * somaX; // Move from somaX to 0
+                        const distFromSignal = Math.abs(normalizedX - signalPos);
+
+                        // Wider signal as it spreads through dendrites
+                        const spreadWidth = signalWidth * (1 + dendritePhase * 0.5);
+                        if (distFromSignal < spreadWidth) {
+                            isLit = true;
+                        }
+
+                        // Twinkling at dendrite ends (left side, x < 0.2)
+                        if (normalizedX < 0.2 && dendritePhase > 0.5) {
+                            // Random twinkling - more frequent
+                            if (Math.random() < 0.12) {
+                                isLit = true;
+                            }
+                        }
+                    }
+                    // Phase 3: Extended twinkling at dendrite ends (1.8 to 2.4)
+                    else if (phase < 2.4) {
+                        // Sustained twinkles at dendrite ends
+                        if (normalizedX < 0.2) {
+                            if (Math.random() < 0.15) {
+                                isLit = true;
+                            }
+                        }
+                    }
+                    // Phase 4: Fade out period (2.4 to 2.8)
+                    else {
+                        const fadePhase = (phase - 2.4) / 0.4;
+                        // Fading twinkles at dendrite ends
+                        if (normalizedX < 0.2 && Math.random() < 0.1 * (1 - fadePhase)) {
+                            isLit = true;
+                        }
+                    }
+
+                    p.char = isLit ? '1' : '0';
                     this.updateParticleColor(p);
                 });
             }
@@ -715,7 +759,9 @@ class MorphingBinary {
 
             // After hold time, either scatter or go directly to next shape
             // Grid shape has shorter hold time (half)
-            const currentHoldTime = (shapeName === 'grid') ? this.holdTime / 2 : this.holdTime;
+            let currentHoldTime = this.holdTime;
+            if (shapeName === 'grid') currentHoldTime = this.holdTime / 2;
+            if (shapeName === 'neuron') currentHoldTime = this.holdTime + 500;
             if (stateElapsed > currentHoldTime && !this.isAtFinalShape()) {
                 if (this.shouldScatter()) {
                     this.startScattering();
@@ -880,7 +926,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (!e.target.closest('.navbar') && navMenu) {
+        if (!e.target.closest('header') && navMenu) {
             navMenu.classList.remove('active');
             const spans = navToggle?.querySelectorAll('span');
             if (spans) {

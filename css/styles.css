@@ -94,8 +94,8 @@ body {
 }
 
 .container {
-    max-width: none;
-    margin: 0;
+    max-width: var(--max-width);
+    margin: 0 auto;
     padding: 0 var(--container-padding);
 }
 
@@ -128,6 +128,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo-group {
@@ -150,7 +151,7 @@ nav {
 
 .logo {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 600;
     color: #1a2533;
     text-decoration: none;
@@ -218,6 +219,8 @@ nav {
     display: flex;
     min-height: 75vh;
     position: relative;
+    max-width: var(--max-width);
+    margin: 0 auto;
 }
 
 .hero-animation {
@@ -228,6 +231,17 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Extend gradient background to left edge of viewport */
+.hero-animation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    width: 50vw;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 50%, #f5f5f5 100%);
 }
 
 .hero-animation::after {
@@ -908,6 +922,8 @@ footer {
 
     .hero-content {
         padding: 2rem 1.5rem;
+        text-align: center;
+        align-items: center;
     }
 
     .hero h1 {
@@ -920,10 +936,30 @@ footer {
 
     .hero-buttons {
         flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
     }
 
     .section h2 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    .about-text {
+        font-size: 1rem;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    .about-left {
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .research-grid {
@@ -942,14 +978,24 @@ footer {
     .about-header {
         grid-template-columns: 1fr;
         gap: 2rem;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .about-header .about-stats {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
     }
 
     .about-stats {
         grid-template-columns: 1fr;
+    }
+
+    .stat-item {
+        padding: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
     }
 
     .footer-content {
