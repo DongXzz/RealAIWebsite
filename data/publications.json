@@ -1,149 +1,39 @@
 {
-  "2025": [
+  "2022": [
     {
-      "title": "Learning Riemannian Metrics for Interpolating Animations",
-      "authors": "S Kushner, V Modi, N Miolane",
-      "venue": "GSI 2025",
-      "image": "kushner_gsi25.png"
-    },
-    {
-      "title": "On the approximation of the Riemannian barycenter",
-      "authors": "S Mataigne, P.-A. Absil, N Miolane",
-      "venue": "GSI 2025",
-      "image": "mataigne_gsi25.png"
-    },
-    {
-      "title": "TopoTune: A Framework for Generalized Combinatorial Complex Neural Networks",
-      "authors": "M Papillon, G Bernárdez, C Battiloro, N Miolane",
-      "venue": "ICML 2025",
-      "image": "papillon_icml25.png"
-    },
-    {
-      "title": "Dynamical Phases of Short-Term Memory Mechanisms in RNNs",
-      "authors": "B Kurtkaya, F Dinc, M Yuksekgonul, M Blanco-Pozo, E Cirakman, M Schnitzer, Y Yemez, H Tanaka, P Yuan, N Miolane",
-      "venue": "ICML 2025",
-      "image": "kurtkaya_icml25.png"
-    },
-    {
-      "title": "Detecting Out-of-Distribution through the Lens of Neural Collapse",
-      "authors": "L Liu, Y Qin",
-      "venue": "CVPR 2025",
-      "image": "liu_cvpr25.png"
-    },
-    {
-      "title": "Gone With the Bits: Revealing Racial Bias in Low-Rate Neural Compression for Facial Images",
-      "authors": "T Qiu, A Nichani, R Tadayontahmasebi, H Jeong",
-      "venue": "FAccT 2025",
-      "image": "qiu_facct25.png"
-    },
-    {
-      "title": "LLMs are Biased Teachers: Evaluating LLM Bias in Personalized Education",
-      "authors": "I Weissburg, S Anand, S Levy, H Jeong",
-      "venue": "Findings of NAACL 2025",
-      "image": "weissburg_naacl25.png"
-    },
-    {
-      "title": "NutriBench: A Dataset for Evaluating Large Language Models in Nutrition Estimation from Meal Descriptions",
-      "authors": "A Hua, MP Dhaliwal, L Pullela, R Burke, Y Qin",
-      "venue": "ICLR 2025",
-      "image": "hua_iclr25.png"
-    },
-    {
-      "title": "Correlated Privacy Mechanisms for Differentially Private Distributed Mean Estimation",
-      "authors": "S Vithana, VR Cadambe, FP Calmon, H Jeong",
-      "venue": "SaTML 2025",
-      "image": "vithana_satml25.png"
-    },
-    {
-      "title": "Flow Tree: A dynamical classifier for quantifying navigation paths and strategies",
-      "authors": "A Bertics, E Chrastil, N Miolane, J Carlson",
-      "venue": "COSYNE 2025",
-      "image": "bertics_cosyne25.png"
-    },
-    {
-      "title": "Can Multimodal Large Language Models Truly Perform Multimodal In-Context Learning?",
-      "authors": "S Chen, Z Han, B He, J Liu, M Buckley, Y Qin, P Torr, V Tresp, J Gu",
-      "venue": "WACV 2025",
-      "image": "chen_wacv25.png"
-    },
-    {
-      "title": "Beyond Euclid: An Illustrated Guide to Modern Machine Learning with Geometric, Topological, and Algebraic Structures",
-      "authors": "S Sanborn, J Mathe, M Papillon, D Buracas, H J Lillemark, C Shewmake, A Bertics, X Pennec, N Miolane",
-      "venue": "Machine Learning: Science and Technology 2025",
-      "image": "sanborn_mlst25.png"
-    }
-  ],
-  "2024": [
-    {
-      "title": "The Selective G-Bispectrum and its Inversion: Applications to G-Invariant Networks",
-      "authors": "S Mataigne, J Mathe, S Sanborn, C Hillar, N Miolane",
-      "venue": "NeurIPS 2024",
+      "title": "Beyond Adult and COMPAS: Fair Multi-Class Prediction via Information Projection",
+      "authors": "W Alghamdi, H Hsu, H Jeong, H Wang, P Michalak, S Asoodeh, F Calmon",
+      "venue": "NeurIPS 2022",
       "image": ""
     },
     {
-      "title": "Global Distortions from Local Rewards: Neural Coding Strategies in Path-Integrating Neural Systems",
-      "authors": "F Acosta, F Dinc, W Redman, M Madhav, D Klindt, N Miolane",
-      "venue": "NeurIPS 2024",
+      "title": "Fairness Without Imputation: A Decision Tree Approach for Fair Prediction with Missing Values",
+      "authors": "H Jeong, H Wang, FP Calmon",
+      "venue": "AAAI 2022",
       "image": ""
     },
     {
-      "title": "Not so griddy: Internal representations of RNNs path integrating more than one agent",
-      "authors": "W Redman, F Acosta, S Acosta-Mendoza, N Miolane",
-      "venue": "NeurIPS 2024",
+      "title": "Are Vision Transformers Robust to Patch Perturbations?",
+      "authors": "J Gu, V Tresp, Y Qin",
+      "venue": "ECCV 2022",
       "image": ""
     },
     {
-      "title": "Unveiling cellular morphology: statistical analysis using a Riemannian elastic metric in cancer cell image datasets",
-      "authors": "W Li, A Prasad, N Miolane, K Dao Duc",
-      "venue": "Information Geometry, 2024",
+      "title": "CryoAI: Amortized Inference of Poses for Ab Initio Reconstruction of 3D Molecular Volumes from Real Cryo-EM Images",
+      "authors": "A Levy, F Poitevin, J Martel, Y Nashed, A Peck, N Miolane, D Ratner, M Dunne, G Wetzstein",
+      "venue": "ECCV 2022",
       "image": ""
     },
     {
-      "title": "Coded Computing Meets Quantum Circuit Simulation: Coded Parallel Tensor Network Contraction Algorithm",
-      "authors": "J Lee, S Gonzalez-Garcia, Z Zhang, H Jeong",
-      "venue": "ISIT 2024",
+      "title": "Understanding and improving robustness of vision transformers through patch-based negative augmentation",
+      "authors": "Y Qin, C Zhang, T Chen, B Lakshminarayanan, A Beutel, X Wang",
+      "venue": "NeurIPS 2022",
       "image": ""
     },
     {
-      "title": "Fast Decision Boundary based Out-of-Distribution Detector",
-      "authors": "L Liu, Y Qin",
-      "venue": "ICML 2024",
-      "image": ""
-    },
-    {
-      "title": "Towards Interpretable Cryo-EM: Disentangling Latent Spaces of Molecular Conformations",
-      "authors": "DA Klindt, A Hyvarinen, A Levy, N Miolane, F Poitevin",
-      "venue": "Frontiers in Molecular Biosciences 2024",
-      "image": ""
-    },
-    {
-      "title": "Position Paper: Challenges and Opportunities in Topological Deep Learning",
-      "authors": "T Papamarkou, T Birdal, M Bronstein, G Carlsson, J Curry, Y Gao, M Hajij, R Kwitt, P Liò, PD Lorenzo, V Maroulas, N Miolane, F Nasrin, KN Ramamurthy, B Rieck, S Scardapane, MT Schaub, P Veličković, B Wang, Y Wang, G Wei, G Zamzmi",
-      "venue": "ICML 2024",
-      "image": ""
-    },
-    {
-      "title": "Initialization Matters for Adversarial Transfer Learning",
-      "authors": "A Hua, J Gu, Z Xue, N Carlini, E Wong, Y Qin",
-      "venue": "CVPR 2024",
-      "image": ""
-    },
-    {
-      "title": "Improving Robustness via Tilted Exponential Layer: A Communication-Theoretic Perspective",
-      "authors": "B Puranik, A Beirami, Y Qin, U Madhow",
-      "venue": "AISTATS 2024",
-      "image": ""
-    },
-    {
-      "title": "Enhancing Small Medical Learners with Privacy-preserving Contextual Prompting",
-      "authors": "X Zhang, S Li, X Yang, C Tian, Y Qin, LR Petzold",
-      "venue": "ICLR 2024",
-      "image": ""
-    },
-    {
-      "title": "Coded Computing for Fault-Tolerant Parallel QR Decomposition",
-      "authors": "QM Nguyen, I Weissburg, H Jeong",
-      "venue": "SIAM Conference on Applied Linear Algebra 2024",
+      "title": "PirouNet: Creating Dance through Artist-Centric Deep Learning",
+      "authors": "M Papillon, M Pettee, N Miolane",
+      "venue": "EAI ArtsIT Conference (Best Paper Award)",
       "image": ""
     }
   ],
@@ -203,7 +93,7 @@
       "image": ""
     },
     {
-      "title": "Differentially Private Fréchet Mean on the Manifold of Symmetric Positive Definite (SPD) Matrices",
+      "title": "Differentially Private FrÃ©chet Mean on the Manifold of Symmetric Positive Definite (SPD) Matrices",
       "authors": "S Utpala, P Vepakomma, N Miolane",
       "venue": "TMLR 2023",
       "image": ""
@@ -221,42 +111,160 @@
       "image": ""
     }
   ],
-  "2022": [
+  "2024": [
     {
-      "title": "Beyond Adult and COMPAS: Fair Multi-Class Prediction via Information Projection",
-      "authors": "W Alghamdi, H Hsu, H Jeong, H Wang, P Michalak, S Asoodeh, F Calmon",
-      "venue": "NeurIPS 2022",
+      "title": "The Selective G-Bispectrum and its Inversion: Applications to G-Invariant Networks",
+      "authors": "S Mataigne, J Mathe, S Sanborn, C Hillar, N Miolane",
+      "venue": "NeurIPS 2024",
       "image": ""
     },
     {
-      "title": "Fairness Without Imputation: A Decision Tree Approach for Fair Prediction with Missing Values",
-      "authors": "H Jeong, H Wang, FP Calmon",
-      "venue": "AAAI 2022",
+      "title": "Global Distortions from Local Rewards: Neural Coding Strategies in Path-Integrating Neural Systems",
+      "authors": "F Acosta, F Dinc, W Redman, M Madhav, D Klindt, N Miolane",
+      "venue": "NeurIPS 2024",
       "image": ""
     },
     {
-      "title": "Are Vision Transformers Robust to Patch Perturbations?",
-      "authors": "J Gu, V Tresp, Y Qin",
-      "venue": "ECCV 2022",
+      "title": "Not so griddy: Internal representations of RNNs path integrating more than one agent",
+      "authors": "W Redman, F Acosta, S Acosta-Mendoza, N Miolane",
+      "venue": "NeurIPS 2024",
       "image": ""
     },
     {
-      "title": "CryoAI: Amortized Inference of Poses for Ab Initio Reconstruction of 3D Molecular Volumes from Real Cryo-EM Images",
-      "authors": "A Levy, F Poitevin, J Martel, Y Nashed, A Peck, N Miolane, D Ratner, M Dunne, G Wetzstein",
-      "venue": "ECCV 2022",
+      "title": "Unveiling cellular morphology: statistical analysis using a Riemannian elastic metric in cancer cell image datasets",
+      "authors": "W Li, A Prasad, N Miolane, K Dao Duc",
+      "venue": "Information Geometry, 2024",
       "image": ""
     },
     {
-      "title": "Understanding and improving robustness of vision transformers through patch-based negative augmentation",
-      "authors": "Y Qin, C Zhang, T Chen, B Lakshminarayanan, A Beutel, X Wang",
-      "venue": "NeurIPS 2022",
+      "title": "Coded Computing Meets Quantum Circuit Simulation: Coded Parallel Tensor Network Contraction Algorithm",
+      "authors": "J Lee, S Gonzalez-Garcia, Z Zhang, H Jeong",
+      "venue": "ISIT 2024",
       "image": ""
     },
     {
-      "title": "PirouNet: Creating Dance through Artist-Centric Deep Learning",
-      "authors": "M Papillon, M Pettee, N Miolane",
-      "venue": "EAI ArtsIT Conference (Best Paper Award)",
+      "title": "Fast Decision Boundary based Out-of-Distribution Detector",
+      "authors": "L Liu, Y Qin",
+      "venue": "ICML 2024",
       "image": ""
+    },
+    {
+      "title": "Towards Interpretable Cryo-EM: Disentangling Latent Spaces of Molecular Conformations",
+      "authors": "DA Klindt, A Hyvarinen, A Levy, N Miolane, F Poitevin",
+      "venue": "Frontiers in Molecular Biosciences 2024",
+      "image": ""
+    },
+    {
+      "title": "Position Paper: Challenges and Opportunities in Topological Deep Learning",
+      "authors": "T Papamarkou, T Birdal, M Bronstein, G Carlsson, J Curry, Y Gao, M Hajij, R Kwitt, P LiÃ², PD Lorenzo, V Maroulas, N Miolane, F Nasrin, KN Ramamurthy, B Rieck, S Scardapane, MT Schaub, P VeliÄkoviÄ, B Wang, Y Wang, G Wei, G Zamzmi",
+      "venue": "ICML 2024",
+      "image": ""
+    },
+    {
+      "title": "Initialization Matters for Adversarial Transfer Learning",
+      "authors": "A Hua, J Gu, Z Xue, N Carlini, E Wong, Y Qin",
+      "venue": "CVPR 2024",
+      "image": ""
+    },
+    {
+      "title": "Improving Robustness via Tilted Exponential Layer: A Communication-Theoretic Perspective",
+      "authors": "B Puranik, A Beirami, Y Qin, U Madhow",
+      "venue": "AISTATS 2024",
+      "image": ""
+    },
+    {
+      "title": "Enhancing Small Medical Learners with Privacy-preserving Contextual Prompting",
+      "authors": "X Zhang, S Li, X Yang, C Tian, Y Qin, LR Petzold",
+      "venue": "ICLR 2024",
+      "image": ""
+    },
+    {
+      "title": "Coded Computing for Fault-Tolerant Parallel QR Decomposition",
+      "authors": "QM Nguyen, I Weissburg, H Jeong",
+      "venue": "SIAM Conference on Applied Linear Algebra 2024",
+      "image": ""
+    }
+  ],
+  "2025": [
+    {
+      "title": "Learning Riemannian Metrics for Interpolating Animations",
+      "authors": "S Kushner, V Modi, N Miolane",
+      "venue": "GSI 2025",
+      "image": "kushner_gsi25.png"
+    },
+    {
+      "title": "On the approximation of the Riemannian barycenter",
+      "authors": "S Mataigne, P.-A. Absil, N Miolane",
+      "venue": "GSI 2025",
+      "image": "mataigne_gsi25.png"
+    },
+    {
+      "title": "TopoTune: A Framework for Generalized Combinatorial Complex Neural Networks",
+      "authors": "M Papillon, G BernÃ¡rdez, C Battiloro, N Miolane",
+      "venue": "ICML 2025",
+      "image": "papillon_icml25.png"
+    },
+    {
+      "title": "Dynamical Phases of Short-Term Memory Mechanisms in RNNs",
+      "authors": "B Kurtkaya, F Dinc, M Yuksekgonul, M Blanco-Pozo, E Cirakman, M Schnitzer, Y Yemez, H Tanaka, P Yuan, N Miolane",
+      "venue": "ICML 2025",
+      "image": "kurtkaya_icml25.png"
+    },
+    {
+      "title": "Detecting Out-of-Distribution through the Lens of Neural Collapse",
+      "authors": "L Liu, Y Qin",
+      "venue": "CVPR 2025",
+      "image": "liu_cvpr25.png"
+    },
+    {
+      "title": "Gone With the Bits: Revealing Racial Bias in Low-Rate Neural Compression for Facial Images",
+      "authors": "T Qiu, A Nichani, R Tadayontahmasebi, H Jeong",
+      "venue": "FAccT 2025",
+      "image": "qiu_facct25.png"
+    },
+    {
+      "title": "LLMs are Biased Teachers: Evaluating LLM Bias in Personalized Education",
+      "authors": "I Weissburg, S Anand, S Levy, H Jeong",
+      "venue": "Findings of NAACL 2025",
+      "image": "weissburg_naacl25.png"
+    },
+    {
+      "title": "NutriBench: A Dataset for Evaluating Large Language Models in Nutrition Estimation from Meal Descriptions",
+      "authors": "A Hua, MP Dhaliwal, L Pullela, R Burke, Y Qin",
+      "venue": "ICLR 2025",
+      "image": "hua_iclr25.png"
+    },
+    {
+      "title": "Correlated Privacy Mechanisms for Differentially Private Distributed Mean Estimation",
+      "authors": "S Vithana, VR Cadambe, FP Calmon, H Jeong",
+      "venue": "SaTML 2025",
+      "image": "vithana_satml25.png"
+    },
+    {
+      "title": "Flow Tree: A dynamical classifier for quantifying navigation paths and strategies",
+      "authors": "A Bertics, E Chrastil, N Miolane, J Carlson",
+      "venue": "COSYNE 2025",
+      "image": "bertics_cosyne25.png"
+    },
+    {
+      "title": "Can Multimodal Large Language Models Truly Perform Multimodal In-Context Learning?",
+      "authors": "S Chen, Z Han, B He, J Liu, M Buckley, Y Qin, P Torr, V Tresp, J Gu",
+      "venue": "WACV 2025",
+      "image": "chen_wacv25.png"
+    },
+    {
+      "title": "Beyond Euclid: An Illustrated Guide to Modern Machine Learning with Geometric, Topological, and Algebraic Structures",
+      "authors": "S Sanborn, J Mathe, M Papillon, D Buracas, H J Lillemark, C Shewmake, A Bertics, X Pennec, N Miolane",
+      "venue": "Machine Learning: Science and Technology 2025",
+      "image": "sanborn_mlst25.png"
+    }
+  ],
+  "2026": [
+    {
+      "title": "When Machine Learning Gets Personal: Evaluating Prediction and Explanation",
+      "authors": "Louisa Cornelis, Guillermo Bernardez, Haewon Jeong, Nina Miolane",
+      "venue": "ICLR 2026",
+      "image": "when_machine_learning_gets_per_1771176579797.jpg"
     }
   ]
 }
