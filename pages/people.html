@@ -236,44 +236,6 @@
 
     <script src="../js/main.js"></script>
     <script>
-        // Fallback people data for local file access
-        const fallbackPeopleData = {
-            "directors": [
-                { "name": "Haewon Jeong", "title": "Assistant Professor", "education": ["PhD @ CMU", "Postdoc @ Harvard"], "image": "haewon_jeong.webp", "description": "I like to understand the darkest secrets of the universe, using AI, and I build generative AI models to make physics simulations faster.", "website": "", "email": "" },
-                { "name": "Nina Miolane", "title": "Assistant Professor", "education": ["PhD @ INRIA", "Postdoc @ Stanford"], "image": "nina_miolane.webp", "description": "I explore the geometry of the world and build AI that understands shapes—from brain structures to cells—to advance science and help people like pregnant women!", "website": "", "email": "" },
-                { "name": "Yao Qin", "title": "Assistant Professor", "education": ["PhD @ UCSD", "Industry @ Google DeepMind"], "image": "yao_qin.webp", "description": "I develop robust, multimodal AI for healthcare, especially to help people with diabetes better manage their glucose and live healthier lives.", "website": "", "email": "" }
-            ],
-            "trainees": [
-                { "name": "Mehak Dhaliwal", "title": "PhD Student", "advisor": "", "image": "mehak_dhaliwal.webp", "description": "", "website": "" },
-                { "name": "Francisco Acosta", "title": "PhD Student", "advisor": "", "image": "francisco_acosta.webp", "description": "", "website": "" },
-                { "name": "Abby Bertics", "title": "PhD Student", "advisor": "", "image": "abby_bertics.webp", "description": "", "website": "" },
-                { "name": "Arjun Nichani", "title": "PhD Student", "advisor": "", "image": "arjun_nichani.webp", "description": "", "website": "" },
-                { "name": "Sarah Kushner", "title": "PhD Student", "advisor": "", "image": "sarah_kushner.webp", "description": "", "website": "" },
-                { "name": "Kenan Tang", "title": "PhD Student", "advisor": "", "image": "kenan_tang.webp", "description": "", "website": "" },
-                { "name": "Daniel Holmberg", "title": "Visiting Scholar", "advisor": "", "image": "daniel_holmberg.webp", "description": "", "website": "" },
-                { "name": "Guillermo Bernárdez Gil", "title": "Postdoc", "advisor": "", "image": "guillermo_bernardez_gil.webp", "description": "", "website": "" },
-                { "name": "Daniel Kunin", "title": "Visiting Scholar", "advisor": "", "image": "daniel_kunin.webp", "description": "", "website": "" },
-                { "name": "Mathilde Papillon", "title": "PhD Student", "advisor": "", "image": "mathilde_papillon.webp", "description": "", "website": "" },
-                { "name": "Andong Hua", "title": "PhD Student", "advisor": "", "image": "andong_hua.webp", "description": "", "website": "" },
-                { "name": "Simon Mataigne", "title": "PhD Student", "advisor": "", "image": "simon_mataigne.webp", "description": "", "website": "" },
-                { "name": "Tian Qiu", "title": "PhD Student", "advisor": "", "image": "tian_qiu.webp", "description": "", "website": "" },
-                { "name": "Louisa Cornelis", "title": "PhD Student", "advisor": "", "image": "louisa_cornelis.webp", "description": "", "website": "" },
-                { "name": "Adele Myers", "title": "PhD Student", "advisor": "", "image": "adele_myers.webp", "description": "", "website": "" },
-                { "name": "Luís F. Pereira", "title": "Research Engineer", "advisor": "", "image": "luis_pereira.webp", "description": "", "website": "" },
-                { "name": "Youngseok Yoon", "title": "PhD Student", "advisor": "", "image": "youngseok_yoon.webp", "description": "", "website": "" },
-                { "name": "Rohan Bhatt", "title": "Undergrad researcher", "advisor": "", "image": "rohan_bhatt.webp", "description": "", "website": "" },
-                { "name": "Sid Kannan", "title": "Undergrad researcher", "advisor": "", "image": "sid_kannan.webp", "description": "", "website": "" },
-                { "name": "Rasta Tadayon", "title": "PhD Student", "advisor": "", "image": "rasta_tadayon.webp", "description": "", "website": "" },
-                { "name": "Bariscan Kurtkaya", "title": "PhD Student", "advisor": "", "image": "bariscan_kurtkaya.webp", "description": "", "website": "" },
-                { "name": "Fatih Dinç", "title": "Postdoc", "advisor": "", "image": "fatih_dinc.webp", "description": "", "website": "" },
-                { "name": "Neel Sankaran", "title": "PhD Student", "advisor": "", "image": "neel_sankaran.webp", "description": "", "website": "" },
-                { "name": "Alex West", "title": "Lab Manager", "advisor": "", "image": "alex_west.webp", "description": "", "website": "" }
-            ],
-            "advisors": [
-                { "name": "Johan Mathe", "title": "Industry Advisor", "image": "johan_mathe.webp", "description": "", "website": "" }
-            ]
-        };
-
         function renderPeople(gridId, people, showAdvisor) {
             const grid = document.getElementById(gridId);
             if (!grid) return;
@@ -296,24 +258,19 @@
             `).join('');
         }
 
-        // Active people data
-        let peopleData = {};
-
         // Load people from JSON file
         async function loadPeople() {
             try {
                 const response = await fetch('../data/people.json');
                 if (!response.ok) throw new Error('Fetch failed');
-                peopleData = await response.json();
-                console.log('People loaded from JSON file');
+                const peopleData = await response.json();
+                renderPeople('directors-grid', peopleData.directors || [], false);
+                renderPeople('trainees-grid', peopleData.trainees || [], true);
+                renderPeople('advisors-grid', peopleData.advisors || [], false);
             } catch (error) {
-                console.log('Fetch failed, using fallback data:', error.message);
-                peopleData = fallbackPeopleData;
+                console.error('Failed to load people:', error.message);
+                document.getElementById('directors-grid').innerHTML = '<p>Unable to load data. Please try again later.</p>';
             }
-
-            renderPeople('directors-grid', peopleData.directors || [], false);
-            renderPeople('trainees-grid', peopleData.trainees || [], true);
-            renderPeople('advisors-grid', peopleData.advisors || [], false);
         }
 
         // Render people when page is ready
