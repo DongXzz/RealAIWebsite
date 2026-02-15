@@ -477,16 +477,19 @@
             ]
         };
 
-        function renderPublications() {
+        function renderPublications(data) {
             const container = document.getElementById('publications-container');
             if (!container) return;
 
             let html = '';
-            const years = Object.keys(publicationsData).sort((a, b) => b - a);
+            const years = Object.keys(data).sort((a, b) => b - a);
 
             years.forEach(year => {
-                const publications = publicationsData[year];
-                const hasImages = year === '2025';
+                const publications = data[year];
+                if (!publications || publications.length === 0) return;
+
+                // Show images for recent years (2025, 2026, etc.)
+                const hasImages = parseInt(year) >= 2025;
 
                 html += `<div class="year-section">`;
                 html += `<h2 class="section-title">${year}</h2>`;
@@ -494,7 +497,7 @@
 
                 publications.forEach(pub => {
                     if (hasImages) {
-                        // Card view with image for 2025 publications
+                        // Card view with image for recent publications
                         html += `
                             <div class="publication-card">
                                 <div class="image-container ${pub.image ? '' : 'no-image'}">
@@ -526,8 +529,21 @@
             container.innerHTML = html;
         }
 
-        // Render publications when page is ready
-        document.addEventListener('DOMContentLoaded', renderPublications);
+        // Load publications from JSON file (works on server) or use fallback data (for local file:// access)
+        async function loadPublications() {
+            try {
+                const response = await fetch('../data/publications.json');
+                if (!response.ok) throw new Error('Fetch failed');
+                const data = await response.json();
+                renderPublications(data);
+            } catch (error) {
+                console.log('Fetch failed, using fallback data');
+                renderPublications(publicationsData);
+            }
+        }
+
+        // Load publications when page is ready
+        document.addEventListener('DOMContentLoaded', loadPublications);
     </script>
 </body>
 </html>
