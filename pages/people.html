@@ -236,8 +236,8 @@
 
     <script src="../js/main.js"></script>
     <script>
-        // People data embedded for local file access
-        const peopleData = {
+        // Fallback people data for local file access
+        const fallbackPeopleData = {
             "directors": [
                 { "name": "Haewon Jeong", "title": "Assistant Professor", "education": ["PhD @ CMU", "Postdoc @ Harvard"], "image": "haewon_jeong.webp", "description": "I like to understand the darkest secrets of the universe, using AI, and I build generative AI models to make physics simulations faster.", "website": "", "email": "" },
                 { "name": "Nina Miolane", "title": "Assistant Professor", "education": ["PhD @ INRIA", "Postdoc @ Stanford"], "image": "nina_miolane.webp", "description": "I explore the geometry of the world and build AI that understands shapes—from brain structures to cells—to advance science and help people like pregnant women!", "website": "", "email": "" },
@@ -296,11 +296,29 @@
             `).join('');
         }
 
+        // Active people data
+        let peopleData = {};
+
+        // Load people from JSON file
+        async function loadPeople() {
+            try {
+                const response = await fetch('../data/people.json');
+                if (!response.ok) throw new Error('Fetch failed');
+                peopleData = await response.json();
+                console.log('People loaded from JSON file');
+            } catch (error) {
+                console.log('Fetch failed, using fallback data:', error.message);
+                peopleData = fallbackPeopleData;
+            }
+
+            renderPeople('directors-grid', peopleData.directors || [], false);
+            renderPeople('trainees-grid', peopleData.trainees || [], true);
+            renderPeople('advisors-grid', peopleData.advisors || [], false);
+        }
+
         // Render people when page is ready
         document.addEventListener('DOMContentLoaded', function() {
-            renderPeople('directors-grid', peopleData.directors, false);
-            renderPeople('trainees-grid', peopleData.trainees, true);
-            renderPeople('advisors-grid', peopleData.advisors, false);
+            loadPeople();
         });
     </script>
 </body>
