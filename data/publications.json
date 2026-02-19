@@ -223,6 +223,12 @@
   ],
   "2025": [
     {
+      "title": "SPICE: A Synergistic, Precise, Iterative, and Customizable Image Editing Workflow",
+      "authors": "K. Tang, Y. Li, Y. Qin",
+      "venue": "NeurIPS Creative AI track, 2025",
+      "image": "spice_a_synergistic_precise_it_1771533167037.jpg"
+    },
+    {
       "title": "Variation in Hypoglycemia Risk with Real-World Physical Activity in Adults with Type 1 Diabetes: Insights from the Type 1 Diabetes Exercise Initiative.",
       "authors": "M. Dhaliwal*, K. Tang*, E. M. Aiello, D. P. Zaharieva, R. A. Lal, C. Summers, B. Arbiter, K. Watson, M. J. Connolly, L. E. Figg, I. Balistreri, A. L. Cortes, R. S. Kingman, B. Suh, M. C. Riddell, Y. Qin.",
       "venue": "Diabetes Technology & Therapeutics (DTT), 2025.",
@@ -314,12 +320,6 @@
     }
   ],
   "2026": [
-    {
-      "title": "SPICE: A Synergistic, Precise, Iterative, and Customizable Image Editing Workflow",
-      "authors": "K. Tang, Y. Li, Y. Qin",
-      "venue": "NeurIPS Creative AI track, 2025",
-      "image": "spice_a_synergistic_precise_it_1771483874300.jpg"
-    },
     {
       "title": "Enhancing Hallucination Detection through Noise Injection",
       "authors": "L. Liu, R. Pourreza, S. Panchal, A. Bhattacharyya, Y. Qin, R. Memisevic",
