@@ -205,6 +205,11 @@
   ],
   "2025": [
     {
+      "title": "Flaw or Artifact? Rethinking Prompt Sensitivity in Evaluating LLMs",
+      "authors": "A. Hua*, K. Tang*, C. Gu, J. Gu, E. Wong, Y. Qin",
+      "venue": "EMNLP 2025",
+      "image": ""
+    },
       "title": "DietAI24 as a framework for comprehensive nutrition estimation using multimodal large language models",
       "authors": "R. Yan, H. Luo, J. Lu, D. Liu, H. Posluszny, M. P. Dhaliwal, J. MacLeod, Y. Qin, C. Yang, T. J. Hartman, X. Hu",
       "venue": "Communications Medicine, 2025",
