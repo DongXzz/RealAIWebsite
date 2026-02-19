@@ -45,6 +45,12 @@
   ],
   "2023": [
     {
+      "title": "Improving Classifier Robustness through Active Generation of Pairwise Counterfactuals",
+      "authors": "A. Balashankar, X. Wang, Y. Qin, N. Thain, B. Packer, E. Chi, A. Beutel.",
+      "venue": "Findings of EMNLP 2023",
+      "image": ""
+    },
+    {
       "title": "A General Framework for Robust G-Invariance in G-Equivariant Networks",
       "authors": "S Sanborn, N Miolane",
       "venue": "NeurIPS 2023",
