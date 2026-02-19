@@ -113,6 +113,12 @@
   ],
   "2024": [
     {
+      "title": "A Minimalist Prompt for Zero-Shot Policy Learning",
+      "authors": "M. Song, X. Wang, T. Biradar, Y. Qin and M. Chandraker.",
+      "venue": "RSS 2024",
+      "image": ""
+    },
+    {
       "title": "The Selective G-Bispectrum and its Inversion: Applications to G-Invariant Networks",
       "authors": "S Mataigne, J Mathe, S Sanborn, C Hillar, N Miolane",
       "venue": "NeurIPS 2024",
