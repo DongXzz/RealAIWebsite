@@ -309,6 +309,12 @@
   ],
   "2026": [
     {
+      "title": "test",
+      "authors": "ttt",
+      "venue": "test",
+      "image": ""
+    },
+    {
       "title": "GraphUniverse: Enabling Systematic Evaluation of Inductive Generalization",
       "authors": "Van Langendonck, L., Bernárdez, G., Miolane, N., Barlet-Ros, P.",
       "venue": "ICLR 2026",
